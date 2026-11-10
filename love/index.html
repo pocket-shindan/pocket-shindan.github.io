@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>恋愛タイプ診断｜12問であなたの恋のクセがわかる</title>
+<meta name="description" content="12問・約1分。あなたの恋愛タイプを8種類から診断します。相性のいいタイプもわかる！">
+<meta property="og:title" content="恋愛タイプ診断｜12問であなたの恋のクセがわかる">
+<meta property="og:description" content="12問・約1分。あなたの恋愛タイプを8種類から診断します。">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root {
+    --bg1: #fff1f3; --bg2: #ffe4ec;
+    --card: #ffffff; --ink: #3a2a33; --sub: #8a6f7c;
+    --accent: #ff5c8a; --accent2: #ff8fab; --line: #f5d3de;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; color: var(--ink);
+    font-family: "Hiragino Maru Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+    background: linear-gradient(160deg, var(--bg1), var(--bg2));
+    display: flex; justify-content: center; padding: 24px 16px 48px;
+  }
+  .wrap { width: 100%; max-width: 480px; }
+  .card {
+    background: var(--card); border-radius: 24px; padding: 28px 22px;
+    box-shadow: 0 10px 30px rgba(255, 92, 138, .15);
+  }
+  h1 { font-size: 26px; margin: 8px 0 6px; text-align: center; letter-spacing: .02em; }
+  .lead { text-align: center; color: var(--sub); margin: 0 0 22px; line-height: 1.7; }
+  .hero { font-size: 56px; text-align: center; margin-top: 4px; }
+  button {
+    font: inherit; cursor: pointer; border: none; width: 100%;
+    border-radius: 999px; padding: 15px 18px; font-weight: 700; font-size: 16px;
+    transition: transform .08s ease, box-shadow .15s ease, background .15s;
+  }
+  button:active { transform: scale(.98); }
+  .primary { background: linear-gradient(90deg, var(--accent), var(--accent2)); color: #fff; box-shadow: 0 6px 16px rgba(255, 92, 138, .35); }
+  .ghost { background: transparent; color: var(--sub); font-weight: 500; margin-top: 10px; }
+  .progress { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; margin-bottom: 8px; }
+  .bar { height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width .25s ease; }
+  .count { font-size: 13px; color: var(--sub); text-align: right; margin-bottom: 18px; }
+  .q { font-size: 20px; font-weight: 700; line-height: 1.6; margin: 0 0 22px; min-height: 64px; }
+  .opt {
+    background: #fff; color: var(--ink); border: 2px solid var(--line); text-align: left;
+    border-radius: 16px; padding: 16px 18px; margin-bottom: 12px; font-weight: 600;
+  }
+  .opt:hover { border-color: var(--accent2); background: #fff7f9; }
+  .r-emoji { font-size: 72px; text-align: center; line-height: 1.1; }
+  .r-label { text-align: center; color: var(--sub); font-size: 14px; margin-top: 10px; }
+  .r-name { text-align: center; font-size: 28px; font-weight: 800; margin: 4px 0 4px; color: var(--accent); }
+  .r-catch { text-align: center; font-weight: 700; margin: 0 0 18px; }
+  .r-desc { line-height: 1.85; margin: 0 0 18px; }
+  .box { border-radius: 16px; padding: 14px 16px; margin-bottom: 12px; line-height: 1.75; }
+  .box b { display: block; margin-bottom: 4px; }
+  .good { background: #fff4f7; }
+  .care { background: #f6f3ff; }
+  .match { background: #f0faf6; }
+  .share { background: #111; color: #fff; margin-top: 8px; }
+  .note { font-size: 12px; color: var(--sub); text-align: center; margin-top: 18px; line-height: 1.7; }
+  .hidden { display: none; }
+  .fade { animation: fade .25s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="start" class="card fade">
+    <div class="hero">💘</div>
+    <h1>恋愛タイプ診断</h1>
+    <p class="lead">12問・約1分。<br>あなたの恋のクセを8タイプから診断します。<br>相性のいいタイプもわかるよ。</p>
+    <button class="primary" id="startBtn">診断をはじめる</button>
+    <p class="note">※エンタメ目的の診断です</p>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="count" id="count"></div>
+    <p class="q" id="question"></p>
+    <button class="opt" id="optA"></button>
+    <button class="opt" id="optB"></button>
+    <button class="ghost" id="backBtn">← ひとつ戻る</button>
+  </section>
+
+  <section id="result" class="card hidden">
+    <div class="r-emoji" id="rEmoji"></div>
+    <div class="r-label">あなたの恋愛タイプは…</div>
+    <div class="r-name" id="rName"></div>
+    <p class="r-catch" id="rCatch"></p>
+    <p class="r-desc" id="rDesc"></p>
+    <div class="box good"><b>💗 恋の強み</b><span id="rGood"></span></div>
+    <div class="box care"><b>⚠️ 気をつけたいこと</b><span id="rCare"></span></div>
+    <div class="box match"><b>🤝 相性◎のタイプ</b><span id="rMatch"></span></div>
+    <button class="primary share" id="shareBtn">𝕏 で結果をシェアする</button>
+    <button class="ghost" id="retryBtn">もう一度診断する</button>
+    <p class="note">※エンタメ目的の診断です</p>
+  </section>
+
+</div>
+
+<script>
+// 軸: A=積極 / C=慎重, H=感情 / L=理性, S=寄り添い / F=自由
+const QUESTIONS = [
+  { q: "気になる人ができたら？", a: ["自分から話しかけにいく", "A"], b: ["相手から来てくれるのを待つ", "C"] },
+  { q: "好きになるきっかけは？", a: ["なんとなくの直感", "H"], b: ["話してみて価値観が合ったとき", "L"] },
+  { q: "休日の過ごし方は？", a: ["できるだけ一緒に過ごしたい", "S"], b: ["それぞれの時間も大事にしたい", "F"] },
+  { q: "気持ちを伝えるなら？", a: ["早めに伝えたい", "A"], b: ["確信が持てるまで待ちたい", "C"] },
+  { q: "ケンカしたら？", a: ["まず自分の気持ちを伝える", "H"], b: ["原因を整理してから話す", "L"] },
+  { q: "恋人の交友関係は？", a: ["正直ちょっと気になる", "S"], b: ["自由でいいと思う", "F"] },
+  { q: "初デートのプランは？", a: ["自分で決めてリードしたい", "A"], b: ["相手の希望に合わせたい", "C"] },
+  { q: "記念日はどうしたい？", a: ["サプライズで盛り上げたい", "H"], b: ["無理なく自然にお祝いしたい", "L"] },
+  { q: "理想の距離感は？", a: ["毎日少しでもつながっていたい", "S"], b: ["会えたときに濃く過ごしたい", "F"] },
+  { q: "連絡はどっちが多い？", a: ["自分から送ることが多い", "A"], b: ["返事をするほうが多い", "C"] },
+  { q: "恋愛映画を観ると？", a: ["すぐ感情移入して泣ける", "H"], b: ["展開を冷静に見てしまう", "L"] },
+  { q: "将来の話は？", a: ["早いうちからしておきたい", "S"], b: ["今を楽しむほうが大事", "F"] },
+];
+
+const TYPES = {
+  AHS: { emoji: "🌻", name: "ひまわり型", catch: "好きになったら一直線の全力一途さん",
+    desc: "好きな人には太陽みたいにまっすぐ。気持ちを隠すのが苦手で、愛情表現もたっぷりです。一緒にいる人を明るく元気にする、いちばん「恋してる」が伝わるタイプ。",
+    good: "迷わず気持ちを伝えられる行動力と、相手を全力で大切にする一途さ。",
+    care: "熱量が高いぶん、相手のペースを置いてけぼりにしがち。返信を急かさない余裕を。" },
+  AHF: { emoji: "🎆", name: "花火型", catch: "ときめきを追いかける恋の冒険家",
+    desc: "出会いの瞬間のドキドキが大好き。ノリと直感で動けて、デートはいつも楽しいイベントに。ただし縛られるのは苦手で、自分の世界も大切にしたい人です。",
+    good: "一緒にいて退屈させない明るさと、新しい体験に誘える行動力。",
+    care: "盛り上がりが落ち着いた時期に冷めたと誤解されやすい。安定期の楽しみ方も見つけて。" },
+  ALS: { emoji: "🗼", name: "灯台型", catch: "迷わせない、頼れる恋のリーダー",
+    desc: "自分からしっかりリードしつつ、相手のことは冷静によく見ています。将来も見すえて関係を育てるので、パートナーに安心感を与えるタイプです。",
+    good: "計画力と包容力。相手が不安なときに道を照らしてあげられる。",
+    care: "正論で解決しようとしがち。相手が求めているのは答えより共感のときもあります。" },
+  ALF: { emoji: "🕊️", name: "渡り鳥型", catch: "スマートでさっぱりな自由人",
+    desc: "アプローチは積極的だけど、ベタベタした関係は苦手。お互い自立した大人の恋が理想です。話が早くて一緒にいてラク、と言われることが多いはず。",
+    good: "重くならない軽やかさと、相手の自由を尊重できる余裕。",
+    care: "あっさりしすぎて「本当に好き？」と不安にさせることも。言葉にするのを忘れずに。" },
+  CHS: { emoji: "🌙", name: "月見草型", catch: "ひそかに想い続ける純愛さん",
+    desc: "自分からはなかなか動けないけど、心の中では誰よりも深く想っています。一度好きになると長く大切にする、静かで情の深いタイプです。",
+    good: "相手の小さな変化にも気づくやさしさと、長く続く深い愛情。",
+    care: "気持ちをため込みすぎて伝わらないことも。小さな「好き」を言葉にする練習を。" },
+  CHF: { emoji: "☁️", name: "綿雲型", catch: "ふんわり流れに身をまかせるマイペースさん",
+    desc: "恋は自然な流れで始まるのがいちばん。感受性は豊かだけど、自分のペースや一人の時間も大事にします。そばにいると空気がやわらぐ癒やし系です。",
+    good: "相手を安心させるおだやかさと、無理をしない自然体の魅力。",
+    care: "受け身でいるうちにチャンスを逃しがち。たまには自分から誘ってみて。" },
+  CLS: { emoji: "🌳", name: "大樹型", catch: "じっくり育てる堅実パートナー",
+    desc: "慎重に相手を見きわめて、信頼できる人とだけ深い関係を築くタイプ。派手さはなくても誠実で、長く一緒にいるほど良さが伝わります。",
+    good: "ぶれない誠実さと、二人の関係を長く大切に育てる力。",
+    care: "慎重すぎて距離が縮まるまで時間がかかりがち。最初の一歩を少しだけ早めて。" },
+  CLF: { emoji: "🐈", name: "猫型", catch: "気まぐれに見えて実は観察上手",
+    desc: "簡単には心を開かないけど、相手のことは冷静によく見ています。束縛は苦手で、自分のペースを守れる相手と心地よい距離感で付き合いたい人です。",
+    good: "ミステリアスな魅力と、相手に依存しない自立心。",
+    care: "本音が見えにくく、相手を不安にさせることも。ときどき甘えてみると効果大。" },
+};
+
+// 相性◎: 積極/慎重 と 感情/理性 が逆、距離感(S/F)は同じ
+function bestMatch(code) {
+  const flip = { A: "C", C: "A", H: "L", L: "H" };
+  return flip[code[0]] + flip[code[1]] + code[2];
+}
+
+const $ = (id) => document.getElementById(id);
+let idx = 0;
+let answers = [];
+
+function show(id) {
+  ["start", "quiz", "result"].forEach((s) => $(s).classList.add("hidden"));
+  $(id).classList.remove("hidden");
+  $(id).classList.remove("fade"); void $(id).offsetWidth; $(id).classList.add("fade");
+  window.scrollTo(0, 0);
+}
+
+function renderQuestion() {
+  const item = QUESTIONS[idx];
+  $("question").textContent = `Q${idx + 1}. ${item.q}`;
+  $("optA").textContent = item.a[0];
+  $("optB").textContent = item.b[0];
+  $("count").textContent = `${idx + 1} / ${QUESTIONS.length}`;
+  $("bar").style.width = `${(idx / QUESTIONS.length) * 100}%`;
+  $("backBtn").style.visibility = idx === 0 ? "hidden" : "visible";
+}
+
+function answer(choice) {
+  answers[idx] = QUESTIONS[idx][choice][1];
+  idx++;
+  if (idx < QUESTIONS.length) renderQuestion();
+  else showResult(calcType());
+}
+
+function calcType() {
+  const score = {};
+  answers.forEach((k) => (score[k] = (score[k] || 0) + 1));
+  // 各軸4問。2対2の同点は「1問目の回答」を優先
+  const pick = (x, y) => {
+    const sx = score[x] || 0, sy = score[y] || 0;
+    if (sx !== sy) return sx > sy ? x : y;
+    return answers.find((k) => k === x || k === y);
+  };
+  return pick("A", "C") + pick("H", "L") + pick("S", "F");
+}
+
+function showResult(code) {
+  const t = TYPES[code];
+  const m = TYPES[bestMatch(code)];
+  $("rEmoji").textContent = t.emoji;
+  $("rName").textContent = t.name;
+  $("rCatch").textContent = t.catch;
+  $("rDesc").textContent = t.desc;
+  $("rGood").textContent = t.good;
+  $("rCare").textContent = t.care;
+  $("rMatch").textContent = `${m.emoji} ${m.name}（${m.catch}）`;
+  $("bar").style.width = "100%";
+  $("shareBtn").onclick = () => {
+    const url = location.href.split("#")[0].split("?")[0];
+    const text = `私の恋愛タイプは「${t.emoji}${t.name}」でした！\n${t.catch}\n相性◎は${m.emoji}${m.name}\n\n#恋愛タイプ診断\n`;
+    const shareUrl = "https://x.com/intent/post?text=" + encodeURIComponent(text) +
+      (url.startsWith("http") ? "&url=" + encodeURIComponent(url) : "");
+    window.open(shareUrl, "_blank", "noopener");
+  };
+  show("result");
+}
+
+$("startBtn").onclick = () => { idx = 0; answers = []; renderQuestion(); show("quiz"); };
+$("optA").onclick = () => answer("a");
+$("optB").onclick = () => answer("b");
+$("backBtn").onclick = () => { if (idx > 0) { idx--; renderQuestion(); } };
+$("retryBtn").onclick = () => show("start");
+</script>
+</body>
+</html>
