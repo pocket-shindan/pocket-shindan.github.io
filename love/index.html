@@ -8,7 +8,24 @@
 <meta property="og:title" content="恋愛タイプ診断｜12問であなたの恋のクセがわかる">
 <meta property="og:description" content="12問・約1分。あなたの恋愛タイプを8種類から診断します。">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://pocket-shindan.github.io/love/">
+<meta property="og:image" content="https://pocket-shindan.github.io/love/ogp.png">
+<meta property="og:site_name" content="pocket-shindan">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pocket-shindan.github.io/love/ogp.png">
+<script>
+  // Google Analytics 4 の測定ID（G-から始まる）。空のままなら計測しない
+  const GA_ID = "";
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  function track(name, params) { if (GA_ID) gtag("event", name, params || {}); }
+  if (GA_ID) {
+    const s = document.createElement("script");
+    s.async = true; s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+    document.head.appendChild(s);
+    gtag("js", new Date()); gtag("config", GA_ID);
+  }
+</script>
 <style>
   :root {
     --bg1: #fff1f3; --bg2: #ffe4ec;
@@ -95,7 +112,7 @@
     <div class="box match"><b>🤝 相性◎のタイプ</b><span id="rMatch"></span></div>
     <button class="primary share" id="shareBtn">𝕏 で結果をシェアする</button>
     <button class="ghost" id="retryBtn">もう一度診断する</button>
-    <p class="note">※エンタメ目的の診断です</p>
+    <p class="note">※エンタメ目的の診断です<br>※アクセス解析に Google アナリティクスを使用しています（個人を特定する情報は収集しません）</p>
   </section>
 
 </div>
@@ -209,7 +226,9 @@ function showResult(code) {
   $("rCare").textContent = t.care;
   $("rMatch").textContent = `${m.emoji} ${m.name}（${m.catch}）`;
   $("bar").style.width = "100%";
+  track("quiz_complete", { result_type: code, result_name: t.name });
   $("shareBtn").onclick = () => {
+    track("share_click", { result_type: code });
     const url = location.href.split("#")[0].split("?")[0];
     const text = `私の恋愛タイプは「${t.emoji}${t.name}」でした！\n${t.catch}\n相性◎は${m.emoji}${m.name}\n\n#恋愛タイプ診断\n`;
     const shareUrl = "https://x.com/intent/post?text=" + encodeURIComponent(text) +
@@ -219,7 +238,7 @@ function showResult(code) {
   show("result");
 }
 
-$("startBtn").onclick = () => { idx = 0; answers = []; renderQuestion(); show("quiz"); };
+$("startBtn").onclick = () => { track("quiz_start"); idx = 0; answers = []; renderQuestion(); show("quiz"); };
 $("optA").onclick = () => answer("a");
 $("optB").onclick = () => answer("b");
 $("backBtn").onclick = () => { if (idx > 0) { idx--; renderQuestion(); } };
