@@ -229,7 +229,9 @@ function showResult(code) {
   track("quiz_complete", { result_type: code, result_name: t.name });
   $("shareBtn").onclick = () => {
     track("share_click", { result_type: code });
-    const url = location.href.split("#")[0].split("?")[0];
+    // タイプ別ページ（r/<code>/）を共有すると、X にタイプ別の画像カードが出る
+    const base = location.href.split("#")[0].split("?")[0].replace(/index\.html$/, "").replace(/\/?$/, "/");
+    const url = base + "r/" + code.toLowerCase() + "/";
     const text = `私の恋愛タイプは「${t.emoji}${t.name}」でした！\n${t.catch}\n相性◎は${m.emoji}${m.name}\n\n#恋愛タイプ診断\n`;
     const shareUrl = "https://x.com/intent/post?text=" + encodeURIComponent(text) +
       (url.startsWith("http") ? "&url=" + encodeURIComponent(url) : "");
