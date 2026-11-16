@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>クリスマスの過ごし方タイプ診断｜12問であなたにぴったりのクリスマスがわかる</title>
+<meta name="description" content="12問・約1分。あなたのクリスマスの過ごし方タイプを8種類から診断します。相性のいいタイプもわかる！">
+<meta property="og:title" content="クリスマスの過ごし方タイプ診断｜12問であなたにぴったりのクリスマスがわかる">
+<meta property="og:description" content="12問・約1分。あなたのクリスマスの過ごし方タイプを8種類から診断します。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pocket-shindan.github.io/xmas/">
+<meta property="og:image" content="https://pocket-shindan.github.io/xmas/ogp.png">
+<meta property="og:site_name" content="pocket-shindan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pocket-shindan.github.io/xmas/ogp.png">
+<script>
+  // 手元の確認（localhost やファイル直開き）は計測しない。本番だけ計測する
+  const GA_ID = location.hostname.endsWith("github.io") ? "G-SWK4ZXGYWH" : "";
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  function track(name, params) { if (GA_ID) gtag("event", name, Object.assign({ quiz: "xmas" }, params || {})); }
+  if (GA_ID) {
+    const s = document.createElement("script");
+    s.async = true; s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+    document.head.appendChild(s);
+    gtag("js", new Date()); gtag("config", GA_ID);
+  }
+</script>
+<style>
+  :root {
+    --bg1: #fff6ef; --bg2: #fde8e4;
+    --card: #ffffff; --ink: #3b2a2a; --sub: #8a6f6f;
+    --accent: #d6334a; --accent2: #e8616f; --green: #2f8f5b; --line: #f3d6d2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; color: var(--ink);
+    font-family: "Hiragino Maru Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+    background: linear-gradient(160deg, var(--bg1), var(--bg2));
+    display: flex; justify-content: center; padding: 24px 16px 48px;
+  }
+  .wrap { width: 100%; max-width: 480px; }
+  .card {
+    background: var(--card); border-radius: 24px; padding: 28px 22px;
+    box-shadow: 0 10px 30px rgba(214, 51, 74, .14);
+    border-top: 6px solid var(--green);
+  }
+  h1 { font-size: 24px; margin: 8px 0 6px; text-align: center; letter-spacing: .02em; }
+  .lead { text-align: center; color: var(--sub); margin: 0 0 22px; line-height: 1.7; }
+  .hero { font-size: 56px; text-align: center; margin-top: 4px; }
+  button {
+    font: inherit; cursor: pointer; border: none; width: 100%;
+    border-radius: 999px; padding: 15px 18px; font-weight: 700; font-size: 16px;
+    transition: transform .08s ease, box-shadow .15s ease, background .15s;
+  }
+  button:active { transform: scale(.98); }
+  .primary { background: linear-gradient(90deg, var(--accent), var(--accent2)); color: #fff; box-shadow: 0 6px 16px rgba(214, 51, 74, .3); }
+  .ghost { background: transparent; color: var(--sub); font-weight: 500; margin-top: 10px; }
+  .progress { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; margin-bottom: 8px; }
+  .bar { height: 100%; width: 0; background: linear-gradient(90deg, var(--green), #4fb27b); transition: width .25s ease; }
+  .count { font-size: 13px; color: var(--sub); text-align: right; margin-bottom: 18px; }
+  .q { font-size: 20px; font-weight: 700; line-height: 1.6; margin: 0 0 22px; min-height: 64px; }
+  .opt {
+    background: #fff; color: var(--ink); border: 2px solid var(--line); text-align: left;
+    border-radius: 16px; padding: 16px 18px; margin-bottom: 12px; font-weight: 600;
+  }
+  .opt:hover { border-color: var(--accent2); background: #fff8f6; }
+  .r-emoji { font-size: 72px; text-align: center; line-height: 1.1; }
+  .r-label { text-align: center; color: var(--sub); font-size: 14px; margin-top: 10px; }
+  .r-name { text-align: center; font-size: 28px; font-weight: 800; margin: 4px 0 4px; color: var(--accent); }
+  .r-catch { text-align: center; font-weight: 700; margin: 0 0 18px; }
+  .r-desc { line-height: 1.85; margin: 0 0 18px; }
+  .box { border-radius: 16px; padding: 14px 16px; margin-bottom: 12px; line-height: 1.75; }
+  .box b { display: block; margin-bottom: 4px; }
+  .good { background: #fff5f3; }
+  .care { background: #f7f4ee; }
+  .match { background: #eef8f2; }
+  .share { background: #111; color: #fff; margin-top: 8px; }
+  .note { font-size: 12px; color: var(--sub); text-align: center; margin-top: 18px; line-height: 1.7; }
+  .hidden { display: none; }
+  .fade { animation: fade .25s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="start" class="card fade">
+    <div class="hero">🎄</div>
+    <h1>クリスマスの過ごし方タイプ診断</h1>
+    <p class="lead">12問・約1分。<br>あなたにぴったりのクリスマスを8タイプから診断します。<br>相性のいいタイプもわかるよ。</p>
+    <button class="primary" id="startBtn">診断をはじめる</button>
+    <p class="note">※エンタメ目的の診断です</p>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="count" id="count"></div>
+    <p class="q" id="question"></p>
+    <button class="opt" id="optA"></button>
+    <button class="opt" id="optB"></button>
+    <button class="ghost" id="backBtn">← ひとつ戻る</button>
+  </section>
+
+  <section id="result" class="card hidden">
+    <div class="r-emoji" id="rEmoji"></div>
+    <div class="r-label">あなたのクリスマスタイプは…</div>
+    <div class="r-name" id="rName"></div>
+    <p class="r-catch" id="rCatch"></p>
+    <p class="r-desc" id="rDesc"></p>
+    <div class="box good"><b>🎁 おすすめの過ごし方</b><span id="rGood"></span></div>
+    <div class="box care"><b>⚠️ ちょっと注意</b><span id="rCare"></span></div>
+    <div class="box match"><b>🤝 相性◎のタイプ（一緒に過ごすと楽しい）</b><span id="rMatch"></span></div>
+    <button class="primary share" id="shareBtn">𝕏 で結果をシェアする</button>
+    <button class="ghost" id="retryBtn">もう一度診断する</button>
+    <p class="note">※エンタメ目的の診断です<br>※アクセス解析に Google アナリティクスを使用しています（個人を特定する情報は収集しません）</p>
+  </section>
+
+</div>
+
+<script>
+// 軸: A=おでかけ / C=おうち, H=雰囲気重視 / L=実用重視, S=誰かと / F=自分のペース
+const QUESTIONS = [
+  { q: "12月の週末、予定がないとき", a: ["どこかへ出かけたくなる", "A"], b: ["家でのんびりしたい", "C"] },
+  { q: "プレゼントを選ぶなら？", a: ["気持ちが伝わるもの", "H"], b: ["実用的で使えるもの", "L"] },
+  { q: "クリスマスは誰と過ごしたい？", a: ["大切な人やみんなと", "S"], b: ["自分のペースで過ごしたい", "F"] },
+  { q: "クリスマスの街のにぎわいは？", a: ["見ているだけでワクワクする", "A"], b: ["人混みはちょっと苦手", "C"] },
+  { q: "クリスマスソングが流れると？", a: ["テンションが上がる", "H"], b: ["特に何も感じない", "L"] },
+  { q: "パーティーに誘われたら？", a: ["すぐ行く！", "S"], b: ["そのときの気分次第", "F"] },
+  { q: "寒い冬の夜は？", a: ["着込んででも出かけたい", "A"], b: ["毛布にくるまっていたい", "C"] },
+  { q: "クリスマスケーキを選ぶなら？", a: ["見た目がかわいいもの", "H"], b: ["味とコスパ重視", "L"] },
+  { q: "自分へのごほうびは？", a: ["誰かと一緒に楽しめるもの", "S"], b: ["自分だけのお気に入り", "F"] },
+  { q: "理想の12月24日の夜は？", a: ["外で特別な時間を過ごす", "A"], b: ["おうちでゆっくり過ごす", "C"] },
+  { q: "「クリスマスだし！」と言われたら？", a: ["特別なことをしたくなる", "H"], b: ["いつも通りでいいと思う", "L"] },
+  { q: "当日の予定は？", a: ["早めに誰かと決めておきたい", "S"], b: ["直前まで決めたくない", "F"] },
+];
+
+const TYPES = {
+  AHS: { emoji: "✨", name: "イルミネーション型", catch: "きらめく街でロマンチックに過ごしたい派",
+    desc: "クリスマスの雰囲気をとことん味わいたいタイプ。イルミネーションや特別なディナーなど、大切な人と「思い出に残る夜」をつくるのが大好きです。",
+    good: "イルミネーションを見に行って、写真をたくさん撮る。予約したお店でゆっくりディナーも◎",
+    care: "期待が高すぎると、ちょっとしたズレでがっかりしがち。予定どおりにいかなくても楽しむ余裕を。" },
+  AHF: { emoji: "🌟", name: "流れ星型", catch: "気ままにきらめきを楽しむおさんぽ派",
+    desc: "クリスマスの雰囲気は大好きだけど、予定にしばられるのは苦手。ふらっと街へ出て、気になるイルミネーションやお店を自由にめぐるのが一番楽しいタイプです。",
+    good: "ひとりで、または気の合う人とイルミネーションさんぽ。気になったカフェに寄り道を。",
+    care: "直前まで決めないと、行きたいお店が満席のことも。ここだけは！という場所は押さえておいて。" },
+  ALS: { emoji: "🎉", name: "パーティー型", catch: "みんなで盛り上げるクリスマスの幹事さん",
+    desc: "大人数でワイワイ過ごすクリスマスが好きなタイプ。お店選びやプレゼント交換の段取りもお手のもので、みんなが楽しめるように動ける頼れる存在です。",
+    good: "友だちを集めてパーティーやプレゼント交換。幹事をすると、より楽しめるはず。",
+    care: "人を楽しませることに夢中で、自分が楽しむのを忘れがち。たまには任せてみて。" },
+  ALF: { emoji: "🛍️", name: "ショッピング型", catch: "セールも街歩きも楽しむごほうび上手",
+    desc: "クリスマスの街は「買い物が楽しい季節」。ロマンチックな雰囲気より、ほしかったものを手に入れたり、限定アイテムを探したりするのがうれしい合理派です。",
+    good: "クリスマス限定のコスメやスイーツを買いに出かける。自分へのごほうびをじっくり選んで。",
+    care: "勢いで買いすぎて、年末にお財布がさみしくなりがち。予算を決めてから出かけると安心。" },
+  CHS: { emoji: "🕯️", name: "キャンドル型", catch: "おうちでしっとりロマンチックに過ごしたい派",
+    desc: "外の人混みより、家で大切な人とゆっくり過ごしたいタイプ。部屋を飾りつけて、キャンドルをともして、2人だけの特別な時間を大事にします。",
+    good: "部屋をクリスマス仕様に飾って、映画を観ながらケーキを食べる。手づくりのプレゼントも◎",
+    care: "準備をがんばりすぎて疲れてしまうことも。完璧じゃなくても、一緒にいる時間が一番の思い出です。" },
+  CHF: { emoji: "☕", name: "ホットココア型", catch: "ひとりでぬくぬく癒やされたい派",
+    desc: "クリスマスの雰囲気は好きだけど、過ごし方は自分のペースで。あたたかい飲み物と好きな映画や音楽で、ゆったり心をととのえるのが至福の時間です。",
+    good: "好きなお菓子とホットココアを用意して、クリスマス映画を一気見。",
+    care: "SNSのキラキラ投稿を見て、ちょっとさみしくなることも。自分の楽しみ方に自信を持って。" },
+  CLS: { emoji: "🍗", name: "チキン型", catch: "おうちパーティーをまわす名シェフ",
+    desc: "家族や友だちと、家でおいしいものを囲むクリスマスが一番。チキンやケーキの手配、料理の段取りまでしっかりこなす、頼れるホスト役タイプです。",
+    good: "チキンとケーキを用意して、おうちでパーティー。みんなで料理するのも楽しい。",
+    care: "準備や片づけを1人で抱えこみがち。手伝ってもらうのも、立派なおもてなしです。" },
+  CLF: { emoji: "🍊", name: "こたつ型", catch: "いつも通りが最高のマイペース派",
+    desc: "クリスマスだからといって特別なことはしなくていい、というタイプ。好きなものを食べて、好きなことをして過ごす「いつも通りの休日」が一番の幸せです。",
+    good: "こたつやソファでゴロゴロしながら、好きなゲームや動画を楽しむ。コンビニのケーキも十分ごちそう。",
+    care: "誘いを断りすぎると、まわりが遠慮してしまうことも。気が向いたら顔を出してみて。" },
+};
+
+// 相性◎: おでかけ/おうち と 雰囲気/実用 が逆、誰かと/自分のペース は同じ
+function bestMatch(code) {
+  const flip = { A: "C", C: "A", H: "L", L: "H" };
+  return flip[code[0]] + flip[code[1]] + code[2];
+}
+
+const $ = (id) => document.getElementById(id);
+let idx = 0;
+let answers = [];
+
+function show(id) {
+  ["start", "quiz", "result"].forEach((s) => $(s).classList.add("hidden"));
+  $(id).classList.remove("hidden");
+  $(id).classList.remove("fade"); void $(id).offsetWidth; $(id).classList.add("fade");
+  window.scrollTo(0, 0);
+}
+
+function renderQuestion() {
+  const item = QUESTIONS[idx];
+  $("question").textContent = `Q${idx + 1}. ${item.q}`;
+  $("optA").textContent = item.a[0];
+  $("optB").textContent = item.b[0];
+  $("count").textContent = `${idx + 1} / ${QUESTIONS.length}`;
+  $("bar").style.width = `${(idx / QUESTIONS.length) * 100}%`;
+  $("backBtn").style.visibility = idx === 0 ? "hidden" : "visible";
+}
+
+function answer(choice) {
+  answers[idx] = QUESTIONS[idx][choice][1];
+  idx++;
+  if (idx < QUESTIONS.length) renderQuestion();
+  else showResult(calcType());
+}
+
+function calcType() {
+  const score = {};
+  answers.forEach((k) => (score[k] = (score[k] || 0) + 1));
+  // 各軸4問。2対2の同点は「1問目の回答」を優先
+  const pick = (x, y) => {
+    const sx = score[x] || 0, sy = score[y] || 0;
+    if (sx !== sy) return sx > sy ? x : y;
+    return answers.find((k) => k === x || k === y);
+  };
+  return pick("A", "C") + pick("H", "L") + pick("S", "F");
+}
+
+function showResult(code) {
+  const t = TYPES[code];
+  const m = TYPES[bestMatch(code)];
+  $("rEmoji").textContent = t.emoji;
+  $("rName").textContent = t.name;
+  $("rCatch").textContent = t.catch;
+  $("rDesc").textContent = t.desc;
+  $("rGood").textContent = t.good;
+  $("rCare").textContent = t.care;
+  $("rMatch").textContent = `${m.emoji} ${m.name}（${m.catch}）`;
+  $("bar").style.width = "100%";
+  track("quiz_complete", { result_type: code, result_name: t.name });
+  $("shareBtn").onclick = () => {
+    track("share_click", { result_type: code });
+    // タイプ別ページ（r/<code>/）を共有すると、X にタイプ別の画像カードが出る
+    const base = location.href.split("#")[0].split("?")[0].replace(/index\.html$/, "").replace(/\/?$/, "/");
+    const url = base + "r/" + code.toLowerCase() + "/";
+    const text = `私のクリスマスタイプは「${t.emoji}${t.name}」でした！\n${t.catch}\n相性◎は${m.emoji}${m.name}\n\n#クリスマス診断\n`;
+    const shareUrl = "https://x.com/intent/post?text=" + encodeURIComponent(text) +
+      (url.startsWith("http") ? "&url=" + encodeURIComponent(url) : "");
+    window.open(shareUrl, "_blank", "noopener");
+  };
+  show("result");
+}
+
+$("startBtn").onclick = () => { track("quiz_start"); idx = 0; answers = []; renderQuestion(); show("quiz"); };
+$("optA").onclick = () => answer("a");
+$("optB").onclick = () => answer("b");
+$("backBtn").onclick = () => { if (idx > 0) { idx--; renderQuestion(); } };
+$("retryBtn").onclick = () => show("start");
+</script>
+</body>
+</html>
