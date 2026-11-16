@@ -3,22 +3,188 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>診断・ツール一覧</title>
+<!-- サイトのトップページのひな形。publish.ps1 が {{...}} を差し替えて 公開サイト/index.html を作る。直接 公開サイト 側は編集しない -->
+<title>ポケット診断｜1分で、ちょっと自分がわかる</title>
+<meta name="description" content="恋愛・性格・季節ものなど、1分でサクッと遊べる診断がそろっています。結果のシェア大歓迎！">
+<meta property="og:title" content="ポケット診断｜1分で、ちょっと自分がわかる">
+<meta property="og:description" content="1分でサクッと遊べる診断がそろっています。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pocket-shindan.github.io/">
+<meta property="og:image" content="https://pocket-shindan.github.io/ogp.png">
+<meta property="og:site_name" content="pocket-shindan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pocket-shindan.github.io/ogp.png">
+<script>
+  const GA_ID = location.hostname.endsWith("github.io") ? "G-SWK4ZXGYWH" : "";
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  if (GA_ID) {
+    const s = document.createElement("script");
+    s.async = true; s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+    document.head.appendChild(s);
+    gtag("js", new Date()); gtag("config", GA_ID);
+  }
+</script>
 <style>
-  body { margin: 0; font-family: "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif; background: #fff5f7; color: #3a2a33; padding: 32px 16px; }
-  main { max-width: 480px; margin: 0 auto; }
-  h1 { font-size: 22px; }
-  ul { list-style: none; padding: 0; }
-  li a { display: block; background: #fff; border-radius: 16px; padding: 16px 18px; margin-bottom: 12px; color: inherit; text-decoration: none; font-weight: 700; box-shadow: 0 4px 14px rgba(255, 92, 138, .12); }
+  :root {
+    --ink: #2f2433; --sub: #7d6b80; --card: #ffffff;
+    --pink: #ff5c8a; --violet: #8b6cff; --mint: #2fbf8f; --sun: #ffb84d;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; color: var(--ink); min-height: 100vh; overflow-x: hidden;
+    font-family: "Hiragino Maru Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, #ffe1ec 0%, transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, #e7e0ff 0%, transparent 55%),
+      radial-gradient(900px 600px at 50% 110%, #dff7ee 0%, transparent 60%),
+      #fffafc;
+  }
+
+  /* ふわふわ浮かぶ絵文字 */
+  .floaties { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .floaties span { position: absolute; font-size: 34px; opacity: .55; animation: float 9s ease-in-out infinite; }
+  @keyframes float { 0%, 100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-22px) rotate(6deg); } }
+
+  .wrap { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 28px 16px 56px; }
+
+  header { text-align: center; padding: 36px 0 26px; }
+  .logo {
+    display: inline-flex; align-items: center; gap: 8px; background: #fff; border-radius: 999px;
+    padding: 8px 18px; font-weight: 800; box-shadow: 0 6px 18px rgba(139, 108, 255, .15);
+  }
+  .logo i { font-style: normal; font-size: 20px; }
+  h1 { font-size: clamp(30px, 7vw, 52px); line-height: 1.25; margin: 22px 0 12px; letter-spacing: .02em; }
+  h1 .hl {
+    background: linear-gradient(90deg, var(--pink), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lead { color: var(--sub); font-size: 16px; line-height: 1.8; margin: 0 0 26px; }
+
+  .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer; text-decoration: none;
+    font: inherit; font-weight: 800; font-size: 16px; border-radius: 999px; padding: 14px 24px;
+    transition: transform .12s ease, box-shadow .2s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: scale(.97); }
+  .btn.main { color: #fff; background: linear-gradient(90deg, var(--pink), var(--violet)); box-shadow: 0 10px 24px rgba(255, 92, 138, .35); }
+  .btn.sub { color: var(--ink); background: #fff; box-shadow: 0 6px 16px rgba(47, 36, 51, .08); }
+
+  .stats { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+  .chip { background: rgba(255, 255, 255, .8); border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 700; color: var(--sub); }
+
+  h2.section { font-size: 20px; margin: 40px 4px 16px; display: flex; align-items: center; gap: 8px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .card {
+    --c: var(--pink);
+    display: flex; flex-direction: column; background: var(--card); border-radius: 24px; overflow: hidden;
+    text-decoration: none; color: inherit; box-shadow: 0 10px 28px rgba(47, 36, 51, .08);
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .card:hover { transform: translateY(-6px) rotate(-.4deg); box-shadow: 0 18px 40px rgba(47, 36, 51, .14); }
+  .thumb { position: relative; aspect-ratio: 1200 / 630; background: #f5f0f6; overflow: hidden; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+  .card:hover .thumb img { transform: scale(1.04); }
+  .badge {
+    position: absolute; top: 12px; left: 12px; background: var(--sun); color: #3b2a00; font-weight: 900; font-size: 12px;
+    padding: 5px 10px; border-radius: 999px; letter-spacing: .05em; box-shadow: 0 4px 10px rgba(0, 0, 0, .12);
+  }
+  .body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .body h3 { margin: 0; font-size: 19px; line-height: 1.4; }
+  .body p { margin: 0; color: var(--sub); font-size: 14px; line-height: 1.7; flex: 1; }
+  .meta { display: flex; gap: 8px; flex-wrap: wrap; }
+  .meta span { font-size: 12px; font-weight: 700; background: #f6f2f7; color: var(--sub); border-radius: 999px; padding: 4px 10px; }
+  .go {
+    align-self: flex-start; margin-top: 4px; color: #fff; background: var(--c); font-weight: 800; font-size: 14px;
+    border-radius: 999px; padding: 9px 16px; transition: padding .15s ease;
+  }
+  .card:hover .go { padding-right: 22px; }
+
+  .soon {
+    display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; min-height: 220px;
+    border: 2px dashed #e6dbe9; border-radius: 24px; color: var(--sub); text-align: center; padding: 20px; background: rgba(255,255,255,.5);
+  }
+  .soon b { font-size: 36px; }
+
+  footer { text-align: center; color: var(--sub); font-size: 13px; line-height: 1.9; margin-top: 48px; }
+  footer a { color: var(--violet); font-weight: 700; text-decoration: none; }
+
+  br.sp { display: none; }
+  @media (max-width: 480px) {
+    header { padding-top: 20px; }
+    br.sp { display: inline; }
+    h1 { font-size: 34px; }
+    .floaties span { font-size: 24px; opacity: .35; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .floaties span { animation: none; }
+    .card, .btn, .thumb img { transition: none; }
+  }
 </style>
 </head>
 <body>
-<main>
-  <h1>診断・ツール一覧</h1>
-  <ul>
-    <li><a href="./love/">恋愛タイプ診断｜12問であなたの恋のクセがわかる</a></li>
-    <li><a href="./xmas/">クリスマスの過ごし方タイプ診断｜12問であなたにぴったりのクリスマスがわかる</a></li>
-  </ul>
-</main>
+<div class="floaties" aria-hidden="true">
+  <span style="left:6%;top:14%;animation-delay:0s">💘</span>
+  <span style="left:88%;top:10%;animation-delay:1.2s">🎄</span>
+  <span style="left:80%;top:62%;animation-delay:2.4s">🌙</span>
+  <span style="left:4%;top:70%;animation-delay:3.1s">🐈</span>
+  <span style="left:48%;top:88%;animation-delay:1.8s">✨</span>
+</div>
+
+<div class="wrap">
+  <header>
+    <div class="logo"><i>🧪</i>ポケット診断</div>
+    <h1>1分で、<br class="sp"><span class="hl">ちょっと自分</span>がわかる。</h1>
+    <p class="lead">サクッと遊べる診断をつくっています。<br>結果はシェア大歓迎！友だちとくらべてみてね。</p>
+    <div class="actions">
+      <button class="btn main" id="random">🎲 ランダムで診断する</button>
+      <a class="btn sub" href="#list">診断をえらぶ ↓</a>
+    </div>
+    <div class="stats">
+      <span class="chip">🧪 公開中 2本</span>
+      <span class="chip">⏱ どれも約1分</span>
+      <span class="chip">🆓 登録なし・無料</span>
+    </div>
+  </header>
+
+  <h2 class="section" id="list">✨ 診断いちらん</h2>
+  <div class="grid">
+    <a class="card" href="./xmas/" style="--c:#ff5c8a">
+      <div class="thumb"><img src="./xmas/ogp.png" alt="クリスマスの過ごし方タイプ診断" loading="lazy"><span class="badge">NEW</span></div>
+      <div class="body">
+        <h3>クリスマスの過ごし方タイプ診断</h3>
+        <p>12問・約1分。あなたのクリスマスの過ごし方タイプを8種類から診断します。相性のいいタイプもわかる！</p>
+        <div class="meta"><span>12問</span><span>約1分</span><span>2026.11.16 公開</span></div>
+        <span class="go">診断する →</span>
+      </div>
+    </a>
+    <a class="card" href="./love/" style="--c:#ff5c8a">
+      <div class="thumb"><img src="./love/ogp.png" alt="恋愛タイプ診断" loading="lazy"><span class="badge">NEW</span></div>
+      <div class="body">
+        <h3>恋愛タイプ診断</h3>
+        <p>12問・約1分。あなたの恋愛タイプを8種類から診断します。相性のいいタイプもわかる！</p>
+        <div class="meta"><span>12問</span><span>約1分</span><span>2026.11.10 公開</span></div>
+        <span class="go">診断する →</span>
+      </div>
+    </a>
+    <div class="soon"><b>🔮</b><div>次の診断を準備中…<br>お楽しみに！</div></div>
+  </div>
+
+  <footer>
+    新しい診断のお知らせは <a href="https://x.com/pocket_shindan" target="_blank" rel="noopener">𝕏 @pocket_shindan</a> で！<br>
+    ※エンタメ目的の診断です／アクセス解析に Google アナリティクスを使用しています
+  </footer>
+</div>
+
+<script>
+  const QUIZZES = ["./xmas/","./love/"];
+  document.getElementById("random").onclick = () => {
+    if (GA_ID) gtag("event", "random_click");
+    location.href = QUIZZES[Math.floor(Math.random() * QUIZZES.length)];
+  };
+</script>
 </body>
 </html>
