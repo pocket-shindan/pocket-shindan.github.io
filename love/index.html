@@ -15,7 +15,8 @@
 <meta name="twitter:image" content="https://pocket-shindan.github.io/love/ogp.png">
 <script>
   // Google Analytics 4 の測定ID（G-から始まる）。空のままなら計測しない
-  const GA_ID = "G-SWK4ZXGYWH";
+  // 手元の確認（localhost やファイル直開き）は計測しない。本番だけ計測する
+  const GA_ID = location.hostname.endsWith("github.io") ? "G-SWK4ZXGYWH" : "";
   window.dataLayer = window.dataLayer || [];
   function gtag() { dataLayer.push(arguments); }
   function track(name, params) { if (GA_ID) gtag("event", name, params || {}); }
