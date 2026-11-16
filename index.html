@@ -72,6 +72,9 @@
   .btn.main { color: #fff; background: linear-gradient(90deg, var(--pink), var(--violet)); box-shadow: 0 10px 24px rgba(255, 92, 138, .35); }
   .btn.sub { color: var(--ink); background: #fff; box-shadow: 0 6px 16px rgba(47, 36, 51, .08); }
 
+  .followline { display: inline-block; margin-top: 16px; font-size: 14px; color: var(--sub); text-decoration: none; border-bottom: 1px dashed #cdbfd3; padding-bottom: 2px; }
+  .followline b { color: var(--violet); }
+  .followline:hover { color: var(--ink); }
   .stats { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
   .chip { background: rgba(255, 255, 255, .8); border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 700; color: var(--sub); }
 
@@ -143,6 +146,7 @@
       <button class="btn main" id="random">🎲 ランダムで診断する</button>
       <a class="btn sub" href="#list">診断をえらぶ ↓</a>
     </div>
+    <a class="followline" href="https://x.com/intent/follow?screen_name=pocket_shindan" target="_blank" rel="noopener" onclick="if (GA_ID) gtag('event', 'follow_click', { from: 'top' });">𝕏 新しい診断のお知らせは <b>@pocket_shindan</b> をフォロー</a>
     <div class="stats">
       <span class="chip">🧪 公開中 2本</span>
       <span class="chip">⏱ どれも約1分</span>
