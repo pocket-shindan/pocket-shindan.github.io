@@ -78,6 +78,8 @@
   .care { background: #f7f4ee; }
   .match { background: #eef8f2; }
   .share { background: #111; color: #fff; margin-top: 8px; }
+  .follow { display: block; text-align: center; margin-top: 10px; padding: 13px 18px; border-radius: 999px; border: 2px solid var(--accent); color: var(--accent); font-weight: 700; text-decoration: none; }
+  .follow:hover { background: var(--line); }
   .note { font-size: 12px; color: var(--sub); text-align: center; margin-top: 18px; line-height: 1.7; }
   .hidden { display: none; }
   .fade { animation: fade .25s ease; }
@@ -114,6 +116,7 @@
     <div class="box care"><b>⚠️ ちょっと注意</b><span id="rCare"></span></div>
     <div class="box match"><b>🤝 相性◎のタイプ（一緒に過ごすと楽しい）</b><span id="rMatch"></span></div>
     <button class="primary share" id="shareBtn">𝕏 で結果をシェアする</button>
+    <a class="follow" id="followBtn" href="https://x.com/intent/follow?screen_name=pocket_shindan" target="_blank" rel="noopener">＋ フォローして新しい診断を受け取る</a>
     <button class="ghost" id="retryBtn">もう一度診断する</button>
     <p class="note">※エンタメ目的の診断です<br>※アクセス解析に Google アナリティクスを使用しています（個人を特定する情報は収集しません）</p>
   </section>
@@ -237,7 +240,7 @@ function showResult(code) {
     const url = base + "r/" + code.toLowerCase() + "/";
     const text = `私のクリスマスタイプは「${t.emoji}${t.name}」でした！\n${t.catch}\n相性◎は${m.emoji}${m.name}\n\n#クリスマス診断\n`;
     const shareUrl = "https://x.com/intent/post?text=" + encodeURIComponent(text) +
-      (url.startsWith("http") ? "&url=" + encodeURIComponent(url) : "");
+      (url.startsWith("http") ? "&url=" + encodeURIComponent(url) : "") + "&via=pocket_shindan";
     window.open(shareUrl, "_blank", "noopener");
   };
   show("result");
@@ -248,6 +251,7 @@ $("optA").onclick = () => answer("a");
 $("optB").onclick = () => answer("b");
 $("backBtn").onclick = () => { if (idx > 0) { idx--; renderQuestion(); } };
 $("retryBtn").onclick = () => show("start");
+$("followBtn").onclick = () => track("follow_click");
 </script>
 </body>
 </html>
