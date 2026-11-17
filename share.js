@@ -30,9 +30,80 @@
     a.onclick = function () { if (typeof track === "function") track("follow_click", { result_type: code, position: "top" }); };
     top.appendChild(a);
   }
+  // ---- 友だち相性（2026-11-17〜）----------------------------------------------
+  // 結果画面の「友だちに送って相性を見る」で ?pair=<自分のタイプ> 付きのリンクを送る。
+  // 友だちがそのリンクから診断すると、結果画面に「2人の相性」が出る。サーバーは使わない（URL だけで受け渡す）。
+  // 各診断の TYPES と bestMatch(code) を使う（どちらも index.html のグローバル）。枠は <div id="pocket-pair"></div>。
+  var PAIR_TIERS = [   // 「相手の相性◎のタイプ」から何文字ちがうかで決める（0=相性◎）
+    { mark: "◎", pct: 96, word: "最高の相性！", note: "一緒にいると自然体でいられる2人。おたがいの足りないところを、気づかないうちに補い合えます" },
+    { mark: "○", pct: 82, word: "いい相性", note: "ちょうどいい違いがある2人。相手のやり方を面白がれると、もっと仲よくなれます" },
+    { mark: "△", pct: 67, word: "ちょっと刺激的", note: "考え方がけっこう違う2人。だからこそ、話すたびに新しい発見があります" },
+    { mark: "☆", pct: 58, word: "正反対コンビ", note: "見ている世界がまるで違う2人。歩み寄れたら、いちばん頼もしいコンビになれます" }
+  ];
+  var hasTypes = function () { return typeof TYPES !== "undefined" && typeof bestMatch === "function"; };
+  var pairFrom = (function () {
+    try { var c = (new URLSearchParams(location.search).get("pair") || "").toUpperCase(); return c; } catch (e) { return ""; }
+  })();
+  function pairValid(c) { return hasTypes() && c && Object.prototype.hasOwnProperty.call(TYPES, c); }
+  function pairScore(a, b) {
+    if (a === b) return { mark: "≒", pct: 74, word: "似たものどうし", note: "同じタイプの2人。言わなくてもわかり合えるぶん、ゆずり合いを忘れずに" };
+    var best = bestMatch(a), d = 0;
+    for (var i = 0; i < 3; i++) if (best[i] !== b[i]) d++;
+    return PAIR_TIERS[Math.min(d, 3)];
+  }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function tname(c) { var t = TYPES[c]; return t.emoji + t.name; }
+  // 友だちから届いたリンクで開いたとき：はじめの画面に案内を出す
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!pairValid(pairFrom)) return;
+    var start = document.getElementById("start");
+    if (!start) return;
+    var b = document.createElement("div");
+    b.style.cssText = "margin:0 0 14px;padding:12px;border-radius:14px;background:#fff4f8;border:2px dashed #ff8fb1;color:#c2185b;font-weight:700;font-size:14px;line-height:1.6;text-align:center;";
+    b.innerHTML = "💌 " + esc(tname(pairFrom)) + " の友だちから<br>相性チェックが届きました！<br><span style='font-weight:500;color:#666;font-size:12px'>診断すると、2人の相性がわかります</span>";
+    start.insertBefore(b, start.firstChild);
+    if (typeof track === "function") track("pair_open", { from_type: pairFrom });
+  });
+  function pairSet(code) {
+    var box = document.getElementById("pocket-pair");
+    if (!box || !hasTypes()) return;
+    var html = "";
+    if (pairValid(pairFrom)) {   // 友だちのリンクから来た人：2人の相性を出す
+      var s = pairScore(pairFrom, code);
+      html += '<div style="margin:14px 0 6px;padding:14px;border-radius:16px;background:linear-gradient(135deg,#fff0f5,#f3f0ff);text-align:center">' +
+        '<div style="font-size:13px;color:#888">友だちとの相性</div>' +
+        '<div style="font-size:15px;font-weight:700;margin:4px 0">' + esc(tname(pairFrom)) + ' × ' + esc(tname(code)) + '</div>' +
+        '<div style="font-size:30px;font-weight:800;color:#e91e63">' + s.mark + ' ' + s.pct + '%</div>' +
+        '<div style="font-weight:700;margin:2px 0 6px">' + esc(s.word) + '</div>' +
+        '<div style="font-size:13px;color:#555;line-height:1.7;text-align:left">' + esc(s.note) + '</div></div>';
+      if (typeof track === "function") track("pair_result", { from_type: pairFrom, result_type: code, mark: s.mark });
+    }
+    // だれでも：自分のタイプ付きのリンクを友だちに送る
+    var base = location.href.split("#")[0].split("?")[0].replace(/index\.html$/, "").replace(/\/?$/, "/");
+    var link = base + "?pair=" + code.toLowerCase() + "&utm_source=pair&utm_medium=" + "invite";
+    var msg = "私は「" + tname(code) + "」だったよ！\nあなたとの相性、診断してみて👇";
+    var pbtn = "display:block;width:100%;box-sizing:border-box;text-align:center;margin-top:8px;padding:12px 16px;border-radius:999px;font-weight:700;font-size:15px;cursor:pointer;text-decoration:none;font-family:inherit;";
+    html += '<div style="margin-top:14px;padding:12px;border-radius:16px;border:2px solid #ffb3c8;background:#fff">' +
+      '<div style="font-weight:700;text-align:center">💞 友だちとの相性を見る</div>' +
+      '<div style="font-size:12px;color:#888;text-align:center;margin:2px 0 4px">このリンクから友だちが診断すると、2人の相性が出ます</div>' +
+      '<a id="pairLine" target="_blank" rel="noopener" style="' + pbtn + 'background:#06C755;color:#fff;border:none" href="https://social-plugins.line.me/lineit/share?url=' + encodeURIComponent(link) + '&text=' + encodeURIComponent(msg) + '">LINE で友だちに送る</a>' +
+      '<button type="button" id="pairMore" style="' + pbtn + 'background:#fff;color:#333;border:2px solid #ccc">' + (navigator.share ? "その他のアプリで送る" : "リンクをコピーして送る") + '</button></div>';
+    box.innerHTML = html;
+    document.getElementById("pairLine").onclick = function () { if (typeof track === "function") track("pair_invite", { result_type: code, method: "line" }); };
+    var more = document.getElementById("pairMore");
+    more.onclick = function () {
+      if (typeof track === "function") track("pair_invite", { result_type: code, method: navigator.share ? "native" : "copy" });
+      if (navigator.share) { navigator.share({ text: msg, url: link }).catch(function () {}); return; }
+      var all = msg + "\n" + link;
+      var done = function () { more.textContent = "コピーしました ✓"; setTimeout(function () { more.textContent = "リンクをコピーして送る"; }, 2000); };
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(all).then(done, function () {});
+      else { var ta = document.createElement("textarea"); ta.value = all; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); done(); } catch (e) {} ta.remove(); }
+    };
+  }
+
   window.pocketShareSet = function (d) {
     var box = document.getElementById("pocket-share");
-    if (d) followSet(d.code);
+    if (d) { followSet(d.code); try { pairSet(d.code); } catch (e) {} }
     if (!box || !d) return;
     var body = plain(d.text);
     var url = /^https?:/.test(d.url || "") ? d.url : "";
