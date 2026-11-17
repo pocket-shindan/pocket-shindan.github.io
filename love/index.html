@@ -112,6 +112,7 @@
     <div class="r-label">あなたの恋愛タイプは…</div>
     <div class="r-name" id="rName"></div>
     <p class="r-catch" id="rCatch"></p>
+    <div id="pocket-follow-top"></div>
     <p class="r-desc" id="rDesc"></p>
     <div class="box good"><b>💗 恋の強み</b><span id="rGood"></span></div>
     <div class="box care"><b>⚠️ 気をつけたいこと</b><span id="rCare"></span></div>
@@ -256,7 +257,7 @@ $("optA").onclick = () => answer("a");
 $("optB").onclick = () => answer("b");
 $("backBtn").onclick = () => { if (idx > 0) { idx--; renderQuestion(); } };
 $("retryBtn").onclick = () => show("start");
-$("followBtn").onclick = () => track("follow_click");
+$("followBtn").onclick = () => track("follow_click", { position: "bottom" });
 </script>
 <script src="/share.js" defer></script>
 <script src="/others.js" defer></script>

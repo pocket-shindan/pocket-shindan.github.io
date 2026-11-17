@@ -12,8 +12,27 @@
   function log(method, code) { if (typeof track === "function") track("share_click", { result_type: code, method: method }); }
   var btn = "display:block;width:100%;box-sizing:border-box;text-align:center;margin-top:8px;padding:12px 16px;border-radius:999px;" +
     "font-weight:700;font-size:15px;cursor:pointer;text-decoration:none;font-family:inherit;";
+  // フォローの呼びかけ（2026-11-17〜。文を変えるときはここだけ直せば全部の診断に反映される。
+  // 変えたら _引き継ぎ.md に日付を書いて、GA4 の follow_click を前後で比べる）
+  var FOLLOW_TOP = "🧪 毎日18時、ラボちゃんの研究日誌が届く！\nフォローはこちら →";   // \n で改行
+  var FOLLOW_BOTTOM = "＋ フォローして新しい診断とラボちゃんの研究日誌を受け取る";
+  var FOLLOW_URL = "https://x.com/intent/follow?screen_name=pocket_shindan";
+  function followSet(code) {
+    var bottom = document.getElementById("followBtn");
+    if (bottom) bottom.textContent = FOLLOW_BOTTOM;
+    var top = document.getElementById("pocket-follow-top");
+    if (!top || top.firstChild) return;
+    var a = document.createElement("a");
+    a.href = FOLLOW_URL; a.target = "_blank"; a.rel = "noopener";
+    a.style.cssText = "display:block;margin:10px 0 4px;padding:9px 12px;border-radius:12px;background:#f3f0ff;color:#5b3fd1;" +
+      "font-weight:700;font-size:13px;text-decoration:none;text-align:center;line-height:1.5;white-space:pre-line;";
+    a.textContent = FOLLOW_TOP;
+    a.onclick = function () { if (typeof track === "function") track("follow_click", { result_type: code, position: "top" }); };
+    top.appendChild(a);
+  }
   window.pocketShareSet = function (d) {
     var box = document.getElementById("pocket-share");
+    if (d) followSet(d.code);
     if (!box || !d) return;
     var body = plain(d.text);
     var url = /^https?:/.test(d.url || "") ? d.url : "";
