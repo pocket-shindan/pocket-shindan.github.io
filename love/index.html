@@ -117,6 +117,7 @@
     <div class="box care"><b>⚠️ 気をつけたいこと</b><span id="rCare"></span></div>
     <div class="box match"><b>🤝 相性◎のタイプ</b><span id="rMatch"></span></div>
     <button class="primary share" id="shareBtn">𝕏 で結果をシェアする</button>
+    <div id="pocket-share"></div>
     <a class="follow" id="followBtn" href="https://x.com/intent/follow?screen_name=pocket_shindan" target="_blank" rel="noopener">＋ フォローして新しい診断を受け取る</a>
     <button class="ghost" id="retryBtn">もう一度診断する</button>
     <div id="pocket-others"></div>
@@ -235,16 +236,18 @@ function showResult(code) {
   $("rMatch").textContent = `${m.emoji} ${m.name}（${m.catch}）`;
   $("bar").style.width = "100%";
   track("quiz_complete", { result_type: code, result_name: t.name });
+  // タイプ別ページ（r/<code>/）を共有すると、X にタイプ別の画像カードが出る
+  const base = location.href.split("#")[0].split("?")[0].replace(/index\.html$/, "").replace(/\/?$/, "/");
+  const url = base + "r/" + code.toLowerCase() + "/";
+  const text = `私の恋愛タイプは「${t.emoji}${t.name}」でした！\n${t.catch}\n相性◎は${m.emoji}${m.name}\n\n#恋愛タイプ診断\n`;
   $("shareBtn").onclick = () => {
-    track("share_click", { result_type: code });
-    // タイプ別ページ（r/<code>/）を共有すると、X にタイプ別の画像カードが出る
-    const base = location.href.split("#")[0].split("?")[0].replace(/index\.html$/, "").replace(/\/?$/, "/");
-    const url = base + "r/" + code.toLowerCase() + "/";
-    const text = `私の恋愛タイプは「${t.emoji}${t.name}」でした！\n${t.catch}\n相性◎は${m.emoji}${m.name}\n\n#恋愛タイプ診断\n`;
+    track("share_click", { result_type: code, method: "x" });
     const shareUrl = "https://x.com/intent/post?text=" + encodeURIComponent(text) +
       (url.startsWith("http") ? "&url=" + encodeURIComponent(url) : "") + "&via=pocket_shindan";
     window.open(shareUrl, "_blank", "noopener");
   };
+  // LINE・その他のアプリ・コピーのボタン（/share.js）
+  if (window.pocketShareSet) pocketShareSet({ text, url, code });
   show("result");
 }
 
@@ -255,6 +258,7 @@ $("backBtn").onclick = () => { if (idx > 0) { idx--; renderQuestion(); } };
 $("retryBtn").onclick = () => show("start");
 $("followBtn").onclick = () => track("follow_click");
 </script>
+<script src="/share.js" defer></script>
 <script src="/others.js" defer></script>
 </body>
 </html>
