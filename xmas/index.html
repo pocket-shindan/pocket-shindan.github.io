@@ -11,6 +11,7 @@
 <meta name="pocket:color" content="#d6334a">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://pocket-shindan.github.io/xmas/">
+<link rel="canonical" href="https://pocket-shindan.github.io/xmas/">
 <meta property="og:image" content="https://pocket-shindan.github.io/xmas/ogp.png">
 <meta property="og:site_name" content="pocket-shindan">
 <meta name="twitter:card" content="summary_large_image">
@@ -118,6 +119,7 @@
     <button class="primary share" id="shareBtn">𝕏 で結果をシェアする</button>
     <a class="follow" id="followBtn" href="https://x.com/intent/follow?screen_name=pocket_shindan" target="_blank" rel="noopener">＋ フォローして新しい診断を受け取る</a>
     <button class="ghost" id="retryBtn">もう一度診断する</button>
+    <div id="pocket-others"></div>
     <p class="note">※エンタメ目的の診断です<br>※アクセス解析に Google アナリティクスを使用しています（個人を特定する情報は収集しません）</p>
   </section>
 
@@ -253,5 +255,6 @@ $("backBtn").onclick = () => { if (idx > 0) { idx--; renderQuestion(); } };
 $("retryBtn").onclick = () => show("start");
 $("followBtn").onclick = () => track("follow_click");
 </script>
+<script src="/others.js" defer></script>
 </body>
 </html>
