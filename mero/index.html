@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>メロタイプ診断｜12問であなたが人をメロらせる瞬間がわかる</title>
+<meta name="description" content="12問・約1分。あなたが人を“メロらせる”ポイントを8タイプから診断します。相性のいいタイプもわかる！">
+<meta property="og:title" content="メロタイプ診断｜12問であなたが人をメロらせる瞬間がわかる">
+<meta property="og:description" content="12問・約1分。あなたのメロいポイントを8タイプから診断します。">
+<meta name="pocket:date" content="2026-11-18">
+<meta name="pocket:color" content="#c2408f">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pocket-shindan.github.io/mero/">
+<link rel="canonical" href="https://pocket-shindan.github.io/mero/">
+<meta property="og:image" content="https://pocket-shindan.github.io/mero/ogp.png">
+<meta property="og:site_name" content="pocket-shindan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pocket-shindan.github.io/mero/ogp.png">
+<script>
+  // 手元の確認（localhost やファイル直開き）は計測しない。本番だけ計測する
+  const GA_ID = location.hostname.endsWith("github.io") ? "G-SWK4ZXGYWH" : "";
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  function track(name, params) { if (GA_ID) gtag("event", name, Object.assign({ quiz: "mero" }, params || {})); }
+  if (GA_ID) {
+    const s = document.createElement("script");
+    s.async = true; s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+    document.head.appendChild(s);
+    gtag("js", new Date()); gtag("config", GA_ID);
+  }
+</script>
+<style>
+  :root {
+    --bg1: #fff3f8; --bg2: #f1e8ff;
+    --card: #ffffff; --ink: #3a2840; --sub: #85708c;
+    --accent: #c2408f; --accent2: #e46aa8; --green: #8e5bd6; --line: #f0d9ea;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; color: var(--ink);
+    font-family: "Hiragino Maru Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+    background: linear-gradient(160deg, var(--bg1), var(--bg2));
+    display: flex; justify-content: center; padding: 24px 16px 48px;
+  }
+  .wrap { width: 100%; max-width: 480px; }
+  .card {
+    background: var(--card); border-radius: 24px; padding: 28px 22px;
+    box-shadow: 0 10px 30px rgba(194, 64, 143, .14);
+    border-top: 6px solid var(--green);
+  }
+  h1 { font-size: 24px; margin: 8px 0 6px; text-align: center; letter-spacing: .02em; }
+  .lead { text-align: center; color: var(--sub); margin: 0 0 22px; line-height: 1.7; }
+  .hero { font-size: 56px; text-align: center; margin-top: 4px; }
+  button {
+    font: inherit; cursor: pointer; border: none; width: 100%;
+    border-radius: 999px; padding: 15px 18px; font-weight: 700; font-size: 16px;
+    transition: transform .08s ease, box-shadow .15s ease, background .15s;
+  }
+  button:active { transform: scale(.98); }
+  .primary { background: linear-gradient(90deg, var(--accent), var(--accent2)); color: #fff; box-shadow: 0 6px 16px rgba(194, 64, 143, .3); }
+  .ghost { background: transparent; color: var(--sub); font-weight: 500; margin-top: 10px; }
+  .progress { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; margin-bottom: 8px; }
+  .bar { height: 100%; width: 0; background: linear-gradient(90deg, var(--green), #b48cf0); transition: width .25s ease; }
+  .count { font-size: 13px; color: var(--sub); text-align: right; margin-bottom: 18px; }
+  .q { font-size: 20px; font-weight: 700; line-height: 1.6; margin: 0 0 22px; min-height: 64px; }
+  .opt {
+    background: #fff; color: var(--ink); border: 2px solid var(--line); text-align: left;
+    border-radius: 16px; padding: 16px 18px; margin-bottom: 12px; font-weight: 600;
+  }
+  .opt:hover { border-color: var(--accent2); background: #fff6fb; }
+  .r-emoji { font-size: 72px; text-align: center; line-height: 1.1; }
+  .r-label { text-align: center; color: var(--sub); font-size: 14px; margin-top: 10px; }
+  .r-name { text-align: center; font-size: 28px; font-weight: 800; margin: 4px 0 4px; color: var(--accent); }
+  .r-catch { text-align: center; font-weight: 700; margin: 0 0 18px; }
+  .r-desc { line-height: 1.85; margin: 0 0 18px; }
+  .box { border-radius: 16px; padding: 14px 16px; margin-bottom: 12px; line-height: 1.75; }
+  .box b { display: block; margin-bottom: 4px; }
+  .good { background: #fff2f8; }
+  .care { background: #f7f4ee; }
+  .match { background: #f3eeff; }
+  .share { background: #111; color: #fff; margin-top: 8px; }
+  .follow { display: block; text-align: center; margin-top: 10px; padding: 13px 18px; border-radius: 999px; border: 2px solid var(--accent); color: var(--accent); font-weight: 700; text-decoration: none; }
+  .follow:hover { background: var(--line); }
+  .note { font-size: 12px; color: var(--sub); text-align: center; margin-top: 18px; line-height: 1.7; }
+  .hidden { display: none; }
+  .fade { animation: fade .25s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="start" class="card fade">
+    <div class="hero">💘</div>
+    <h1>メロタイプ診断</h1>
+    <p class="lead">12問・約1分。<br>あなたが人を“メロらせる”瞬間を<br>8タイプから診断します。<br>相性のいいタイプもわかるよ。</p>
+    <button class="primary" id="startBtn">診断をはじめる</button>
+    <p class="note">※「メロい」＝思わずメロメロになるくらい魅力的、という意味の言葉です<br>※エンタメ目的の診断です</p>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="count" id="count"></div>
+    <p class="q" id="question"></p>
+    <button class="opt" id="optA"></button>
+    <button class="opt" id="optB"></button>
+    <button class="ghost" id="backBtn">← ひとつ戻る</button>
+  </section>
+
+  <section id="result" class="card hidden">
+    <div class="r-emoji" id="rEmoji"></div>
+    <div class="r-label">あなたのメロタイプは…</div>
+    <div class="r-name" id="rName"></div>
+    <p class="r-catch" id="rCatch"></p>
+    <div id="pocket-follow-top"></div>
+    <p class="r-desc" id="rDesc"></p>
+    <div class="box good"><b>💘 ここがメロい</b><span id="rGood"></span></div>
+    <div class="box care"><b>⚠️ メロすぎ注意</b><span id="rCare"></span></div>
+    <div class="box match"><b>🤝 相性◎のタイプ（おたがいにメロり合える）</b><span id="rMatch"></span></div>
+    <div id="pocket-pair"></div>
+    <button class="primary share" id="shareBtn">𝕏 で結果をシェアする</button>
+    <div id="pocket-share"></div>
+    <a class="follow" id="followBtn" href="https://x.com/intent/follow?screen_name=pocket_shindan" target="_blank" rel="noopener">＋ フォローして新しい診断を受け取る</a>
+    <button class="ghost" id="retryBtn">もう一度診断する</button>
+    <div id="pocket-others"></div>
+    <p class="note">※エンタメ目的の診断です<br>※アクセス解析に Google アナリティクスを使用しています（個人を特定する情報は収集しません）</p>
+  </section>
+
+</div>
+
+<script>
+// 軸: A=気持ちを外に出す / C=内に秘める, H=甘く熱い / L=クールで余裕, S=しっかり計画 / F=気ままに自由
+const QUESTIONS = [
+  { q: "好きな人の前では？", a: ["自然と話しかけにいく", "A"], b: ["気づけば目で追っている", "C"] },
+  { q: "好意を伝えるなら？", a: ["言葉や態度でまっすぐ伝える", "H"], b: ["わかる人にはわかる程度に", "L"] },
+  { q: "デートの日は？", a: ["お店や流れを決めておきたい", "S"], b: ["その場のノリで決めたい", "F"] },
+  { q: "初めての集まりでは？", a: ["自分から輪に入っていく", "A"], b: ["話しかけられるのを待つ", "C"] },
+  { q: "「かわいい」「かっこいい」と言われたら？", a: ["素直に喜んで顔に出る", "H"], b: ["平気なふりをする", "L"] },
+  { q: "LINEの返信は？", a: ["なるべく早く、きちんと返す", "S"], b: ["気が向いたときに、ゆるく返す", "F"] },
+  { q: "SNSでの自分は？", a: ["日常をよく投稿する", "A"], b: ["見る専か、たまに投稿", "C"] },
+  { q: "相手が落ちこんでいたら？", a: ["全力で励ます", "H"], b: ["何も言わずにそっとそばにいる", "L"] },
+  { q: "待ち合わせは？", a: ["少し早めに着いている", "S"], b: ["だいたい時間ぴったり", "F"] },
+  { q: "誰かをほめたいと思ったら？", a: ["その場で口に出す", "A"], b: ["心の中で思っておく", "C"] },
+  { q: "好きなものの話になると？", a: ["つい熱く語ってしまう", "H"], b: ["聞かれたら答えるくらい", "L"] },
+  { q: "休みの日の予定は？", a: ["前もって決めておく", "S"], b: ["起きてから決める", "F"] },
+];
+
+const TYPES = {
+  AHS: { emoji: "🌞", name: "太陽型", catch: "まっすぐな笑顔でメロらせる人",
+    desc: "明るさと行動力で、まわりを自然と笑顔にするタイプ。好きなものは好き、うれしいときはうれしいと、気持ちを隠さないまっすぐさが最大の魅力です。",
+    good: "名前を呼んで笑いかける、その一瞬の破壊力。予定を立ててリードしてくれる頼もしさにも、まわりはこっそりメロっています。",
+    care: "全力すぎて、相手が照れて引いてしまうことも。たまには相手のペースを待つのも◎" },
+  AHF: { emoji: "🎈", name: "ふうせん型", catch: "無邪気なノリでメロらせる人",
+    desc: "思ったことがすぐ顔と行動に出る、天真らんまんなタイプ。いっしょにいると何が起きるかわからないワクワク感で、まわりを夢中にさせます。",
+    good: "思いついたら即「行こう！」と誘える軽やかさ。楽しそうに笑う顔が、いちばんのメロポイントです。",
+    care: "気分で予定を変えすぎると、相手が振り回されがち。大事な約束だけは守って。" },
+  ALS: { emoji: "🎩", name: "エスコート型", catch: "余裕のリードでメロらせる人",
+    desc: "人前でも落ち着いていて、場をスマートにまわせるタイプ。がんばっている感じを出さずに、相手が心地よく過ごせるよう先回りできます。",
+    good: "さりげなく車道側を歩く、お店を予約しておく…「わかってる」感じのスマートさに、まわりはメロっています。",
+    care: "完璧すぎて、すきがないと思われることも。たまには弱いところも見せて。" },
+  ALF: { emoji: "🍃", name: "そよ風型", catch: "さらっとした優しさでメロらせる人",
+    desc: "人なつっこいのに、重くならない絶妙な距離感のタイプ。押しつけない優しさで、いっしょにいる人を自然とリラックスさせます。",
+    good: "重くならない気づかいと、去りぎわの軽やかな「またね」。また会いたくなる後味がずるいところです。",
+    care: "さっぱりしすぎて「本当に興味ある？」と不安にさせることも。好意はたまに言葉で。" },
+  CHS: { emoji: "💌", name: "手紙型", catch: "言わない気づかいでメロらせる人",
+    desc: "口数は多くないけれど、心の中は愛情でいっぱいのタイプ。相手のことをよく見ていて、言葉より行動で大切にしていることを伝えます。",
+    good: "相手の好きなものを覚えていて、さりげなく用意している。気づいた瞬間に、相手を一気にメロらせます。",
+    care: "気持ちをためこみがち。伝えないと届かない言葉もあります。" },
+  CHF: { emoji: "🧸", name: "ぬいぐるみ型", catch: "ふとした甘えでメロらせる人",
+    desc: "ふだんはおっとり控えめなのに、心を許した相手にはとことん甘えたくなるタイプ。いっしょにいるだけで安心させる、やわらかい空気をまとっています。",
+    good: "おとなしいのに、ふと見せる甘えや素直なひとこと。そのギャップがたまらなくメロいところです。",
+    care: "甘えたいのにがまんしがち。言えたら、もっと好かれます。" },
+  CLS: { emoji: "🌙", name: "月型", catch: "静かな大人っぽさでメロらせる人",
+    desc: "多くを語らず、落ち着いた雰囲気で人を引きつけるタイプ。自分の世界を持っていて、そのミステリアスさに「もっと知りたい」と思わせます。",
+    good: "言葉は少ないのに、ひとことが的確で頼れる。ふと笑ったときの特別感に、まわりはメロっています。",
+    care: "クールに見られて、話しかけづらいと思われることも。自分からひとこと声をかけてみて。" },
+  CLF: { emoji: "🦊", name: "きつね型", catch: "気まぐれなギャップでメロらせる人",
+    desc: "つかみどころがなく、ふるまいが読めない自由人タイプ。そっけないかと思えば急に距離が近い、その予測できなさが人を夢中にさせます。",
+    good: "そっけないと思ったら、急に人なつっこい。読めないところに、まわりは振り回されつつメロっています。",
+    care: "気まぐれが続くと誤解されることも。大事な人には、たまに本音を。" },
+};
+
+// 相性◎: 外に出す/秘める と 甘い/クール が逆、計画/自由 は同じ（太陽↔月、エスコート↔手紙 など）
+function bestMatch(code) {
+  const flip = { A: "C", C: "A", H: "L", L: "H" };
+  return flip[code[0]] + flip[code[1]] + code[2];
+}
+
+const $ = (id) => document.getElementById(id);
+let idx = 0;
+let answers = [];
+
+function show(id) {
+  ["start", "quiz", "result"].forEach((s) => $(s).classList.add("hidden"));
+  $(id).classList.remove("hidden");
+  $(id).classList.remove("fade"); void $(id).offsetWidth; $(id).classList.add("fade");
+  window.scrollTo(0, 0);
+}
+
+function renderQuestion() {
+  const item = QUESTIONS[idx];
+  $("question").textContent = `Q${idx + 1}. ${item.q}`;
+  $("optA").textContent = item.a[0];
+  $("optB").textContent = item.b[0];
+  $("count").textContent = `${idx + 1} / ${QUESTIONS.length}`;
+  $("bar").style.width = `${(idx / QUESTIONS.length) * 100}%`;
+  $("backBtn").style.visibility = idx === 0 ? "hidden" : "visible";
+}
+
+function answer(choice) {
+  answers[idx] = QUESTIONS[idx][choice][1];
+  idx++;
+  if (idx < QUESTIONS.length) renderQuestion();
+  else showResult(calcType());
+}
+
+function calcType() {
+  const score = {};
+  answers.forEach((k) => (score[k] = (score[k] || 0) + 1));
+  // 各軸4問。2対2の同点は「1問目の回答」を優先
+  const pick = (x, y) => {
+    const sx = score[x] || 0, sy = score[y] || 0;
+    if (sx !== sy) return sx > sy ? x : y;
+    return answers.find((k) => k === x || k === y);
+  };
+  return pick("A", "C") + pick("H", "L") + pick("S", "F");
+}
+
+function showResult(code) {
+  const t = TYPES[code];
+  const m = TYPES[bestMatch(code)];
+  $("rEmoji").textContent = t.emoji;
+  $("rName").textContent = t.name;
+  $("rCatch").textContent = t.catch;
+  $("rDesc").textContent = t.desc;
+  $("rGood").textContent = t.good;
+  $("rCare").textContent = t.care;
+  $("rMatch").textContent = `${m.emoji} ${m.name}（${m.catch}）`;
+  $("bar").style.width = "100%";
+  track("quiz_complete", { result_type: code, result_name: t.name });
+  // タイプ別ページ（r/<code>/）を共有すると、X にタイプ別の画像カードが出る
+  const base = location.href.split("#")[0].split("?")[0].replace(/index\.html$/, "").replace(/\/?$/, "/");
+  const url = base + "r/" + code.toLowerCase() + "/";
+  const text = `私のメロタイプは「${t.emoji}${t.name}」でした！\n${t.catch}\n相性◎は${m.emoji}${m.name}\n\n#メロタイプ診断\n`;
+  $("shareBtn").onclick = () => {
+    track("share_click", { result_type: code, method: "x" });
+    const shareUrl = "https://x.com/intent/post?text=" + encodeURIComponent(text) +
+      (url.startsWith("http") ? "&url=" + encodeURIComponent(url) : "") + "&via=pocket_shindan";
+    window.open(shareUrl, "_blank", "noopener");
+  };
+  // LINE・その他のアプリ・コピーのボタン（/share.js）
+  if (window.pocketShareSet) pocketShareSet({ text, url, code });
+  show("result");
+}
+
+$("startBtn").onclick = () => { track("quiz_start"); idx = 0; answers = []; renderQuestion(); show("quiz"); };
+$("optA").onclick = () => answer("a");
+$("optB").onclick = () => answer("b");
+$("backBtn").onclick = () => { if (idx > 0) { idx--; renderQuestion(); } };
+$("retryBtn").onclick = () => show("start");
+$("followBtn").onclick = () => track("follow_click", { position: "bottom" });
+</script>
+<script src="/share.js" defer></script>
+<script src="/others.js" defer></script>
+</body>
+</html>

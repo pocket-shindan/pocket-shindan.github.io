@@ -150,7 +150,7 @@
     </div>
     <a class="followline" href="https://x.com/intent/follow?screen_name=pocket_shindan" target="_blank" rel="noopener" onclick="if (GA_ID) gtag('event', 'follow_click', { from: 'top' });">𝕏 新しい診断のお知らせは <b>@pocket_shindan</b> をフォロー</a>
     <div class="stats">
-      <span class="chip">🧪 公開中 2本</span>
+      <span class="chip">🧪 公開中 3本</span>
       <span class="chip">⏱ どれも約1分</span>
       <span class="chip">🆓 登録なし・無料</span>
     </div>
@@ -158,6 +158,15 @@
 
   <h2 class="section" id="list">✨ 診断いちらん</h2>
   <div class="grid">
+    <a class="card" href="./mero/" style="--c:#c2408f">
+      <div class="thumb"><img src="./mero/ogp.png" alt="メロタイプ診断" loading="lazy"><span class="badge">NEW</span></div>
+      <div class="body">
+        <h3>メロタイプ診断</h3>
+        <p>12問・約1分。あなたが人を“メロらせる”ポイントを8タイプから診断します。相性のいいタイプもわかる！</p>
+        <div class="meta"><span>12問</span><span>約1分</span><span>2026.11.18 公開</span></div>
+        <span class="go">診断する →</span>
+      </div>
+    </a>
     <a class="card" href="./xmas/" style="--c:#d6334a">
       <div class="thumb"><img src="./xmas/ogp.png" alt="クリスマスの過ごし方タイプ診断" loading="lazy"><span class="badge">NEW</span></div>
       <div class="body">
@@ -186,7 +195,7 @@
 </div>
 
 <script>
-  const QUIZZES = ["./xmas/","./love/"];
+  const QUIZZES = ["./mero/","./xmas/","./love/"];
   document.getElementById("random").onclick = () => {
     if (GA_ID) gtag("event", "random_click");
     location.href = QUIZZES[Math.floor(Math.random() * QUIZZES.length)];

@@ -2,7 +2,7 @@
 // build-top.ps1 が公開のたびに、公開中の診断の一覧を下の QUIZZES に入れて 公開サイト/others.js を作る（ここは手で直さない）。
 // 各診断の index.html には <div id="pocket-others"></div> と <script src="/others.js" defer></script> を入れておく（check.py が確認）。
 (function () {
-  var QUIZZES = [{"slug":"xmas","title":"クリスマスの過ごし方タイプ診断","color":"#d6334a","q":12},{"slug":"love","title":"恋愛タイプ診断","color":"#ff5c8a","q":12}];
+  var QUIZZES = [{"slug":"mero","title":"メロタイプ診断","color":"#c2408f","q":12},{"slug":"xmas","title":"クリスマスの過ごし方タイプ診断","color":"#d6334a","q":12},{"slug":"love","title":"恋愛タイプ診断","color":"#ff5c8a","q":12}];
   var box = document.getElementById("pocket-others");
   if (!box) return;
   var me = location.pathname.split("/").filter(Boolean)[0] || "";
