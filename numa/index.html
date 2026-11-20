@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>恋愛の沼りやすさ診断｜12問であなたの恋のハマり方がわかる</title>
+<meta name="description" content="12問・約1分。恋にハマりやすいか、どうハマるかを8タイプから診断します。沼り度と相性のいいタイプもわかる！">
+<meta property="og:title" content="恋愛の沼りやすさ診断｜12問であなたの恋のハマり方がわかる">
+<meta property="og:description" content="12問・約1分。あなたの恋の沼り度とハマり方を8タイプから診断します。">
+<meta name="pocket:date" content="2026-11-20">
+<meta name="pocket:color" content="#1f8a70">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pocket-shindan.github.io/numa/">
+<link rel="canonical" href="https://pocket-shindan.github.io/numa/">
+<meta property="og:image" content="https://pocket-shindan.github.io/numa/ogp.png">
+<meta property="og:site_name" content="pocket-shindan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pocket-shindan.github.io/numa/ogp.png">
+<script>
+  // 手元の確認（localhost やファイル直開き）は計測しない。本番だけ計測する
+  const GA_ID = location.hostname.endsWith("github.io") ? "G-SWK4ZXGYWH" : "";
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  function track(name, params) { if (GA_ID) gtag("event", name, Object.assign({ quiz: "numa" }, params || {})); }
+  if (GA_ID) {
+    const s = document.createElement("script");
+    s.async = true; s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+    document.head.appendChild(s);
+    gtag("js", new Date()); gtag("config", GA_ID);
+  }
+</script>
+<style>
+  :root {
+    --bg1: #eefaf5; --bg2: #efedff;
+    --card: #ffffff; --ink: #22372f; --sub: #6b8079;
+    --accent: #1f8a70; --accent2: #38b48b; --green: #6a5acd; --line: #d3ece2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; color: var(--ink);
+    font-family: "Hiragino Maru Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+    background: linear-gradient(160deg, var(--bg1), var(--bg2));
+    display: flex; justify-content: center; padding: 24px 16px 48px;
+  }
+  .wrap { width: 100%; max-width: 480px; }
+  .card {
+    background: var(--card); border-radius: 24px; padding: 28px 22px;
+    box-shadow: 0 10px 30px rgba(31, 138, 112, .14);
+    border-top: 6px solid var(--green);
+  }
+  h1 { font-size: 24px; margin: 8px 0 6px; text-align: center; letter-spacing: .02em; }
+  .lead { text-align: center; color: var(--sub); margin: 0 0 22px; line-height: 1.7; }
+  .hero { font-size: 56px; text-align: center; margin-top: 4px; }
+  button {
+    font: inherit; cursor: pointer; border: none; width: 100%;
+    border-radius: 999px; padding: 15px 18px; font-weight: 700; font-size: 16px;
+    transition: transform .08s ease, box-shadow .15s ease, background .15s;
+  }
+  button:active { transform: scale(.98); }
+  .primary { background: linear-gradient(90deg, var(--accent), var(--accent2)); color: #fff; box-shadow: 0 6px 16px rgba(31, 138, 112, .3); }
+  .ghost { background: transparent; color: var(--sub); font-weight: 500; margin-top: 10px; }
+  .progress { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; margin-bottom: 8px; }
+  .bar { height: 100%; width: 0; background: linear-gradient(90deg, var(--green), #9a8cf0); transition: width .25s ease; }
+  .count { font-size: 13px; color: var(--sub); text-align: right; margin-bottom: 18px; }
+  .q { font-size: 20px; font-weight: 700; line-height: 1.6; margin: 0 0 22px; min-height: 64px; }
+  .opt {
+    background: #fff; color: var(--ink); border: 2px solid var(--line); text-align: left;
+    border-radius: 16px; padding: 16px 18px; margin-bottom: 12px; font-weight: 600;
+  }
+  .opt:hover { border-color: var(--accent2); background: #f2fbf7; }
+  .r-emoji { font-size: 72px; text-align: center; line-height: 1.1; }
+  .r-label { text-align: center; color: var(--sub); font-size: 14px; margin-top: 10px; }
+  .r-name { text-align: center; font-size: 28px; font-weight: 800; margin: 4px 0 4px; color: var(--accent); }
+  .r-catch { text-align: center; font-weight: 700; margin: 0 0 18px; }
+  .r-desc { line-height: 1.85; margin: 0 0 18px; }
+  .box { border-radius: 16px; padding: 14px 16px; margin-bottom: 12px; line-height: 1.75; }
+  .box b { display: block; margin-bottom: 4px; }
+  .good { background: #ecf8f2; }
+  .care { background: #f7f4ee; }
+  .match { background: #efedff; }
+  .share { background: #111; color: #fff; margin-top: 8px; }
+  .follow { display: block; text-align: center; margin-top: 10px; padding: 13px 18px; border-radius: 999px; border: 2px solid var(--accent); color: var(--accent); font-weight: 700; text-decoration: none; }
+  .follow:hover { background: var(--line); }
+  .note { font-size: 12px; color: var(--sub); text-align: center; margin-top: 18px; line-height: 1.7; }
+  .hidden { display: none; }
+  .fade { animation: fade .25s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="start" class="card fade">
+    <div class="hero">🌀</div>
+    <h1>恋愛の沼りやすさ診断</h1>
+    <p class="lead">12問・約1分。<br>あなたの恋のハマり方と<br>沼り度を8タイプから診断します。<br>相性のいいタイプもわかるよ。</p>
+    <button class="primary" id="startBtn">診断をはじめる</button>
+    <p class="note">※「沼る」＝夢中になって抜け出せなくなる、という意味の言葉です<br>※エンタメ目的の診断です</p>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="count" id="count"></div>
+    <p class="q" id="question"></p>
+    <button class="opt" id="optA"></button>
+    <button class="opt" id="optB"></button>
+    <button class="ghost" id="backBtn">← ひとつ戻る</button>
+  </section>
+
+  <section id="result" class="card hidden">
+    <div class="r-emoji" id="rEmoji"></div>
+    <div class="r-label">あなたの沼りタイプは…</div>
+    <div class="r-name" id="rName"></div>
+    <p class="r-catch" id="rCatch"></p>
+    <div id="pocket-follow-top"></div>
+    <p class="r-desc" id="rDesc"></p>
+    <div class="box good"><b>💚 沼ったときの魅力</b><span id="rGood"></span></div>
+    <div class="box care"><b>⚠️ 沼りすぎ注意</b><span id="rCare"></span></div>
+    <div class="box match"><b>🤝 相性◎のタイプ（沼り方がちょうどよく合う）</b><span id="rMatch"></span></div>
+    <div id="pocket-pair"></div>
+    <button class="primary share" id="shareBtn">𝕏 で結果をシェアする</button>
+    <div id="pocket-share"></div>
+    <a class="follow" id="followBtn" href="https://x.com/intent/follow?screen_name=pocket_shindan" target="_blank" rel="noopener">＋ フォローして新しい診断を受け取る</a>
+    <button class="ghost" id="retryBtn">もう一度診断する</button>
+    <div id="pocket-others"></div>
+    <p class="note">※エンタメ目的の診断です<br>※アクセス解析に Google アナリティクスを使用しています（個人を特定する情報は収集しません）</p>
+  </section>
+
+</div>
+
+<script>
+// 軸: A=気持ちが表に出る / C=内に秘める, H=のめり込む / L=ブレーキがきく, S=じわじわハマる / F=一瞬で落ちる
+const QUESTIONS = [
+  { q: "好きな人ができたら？", a: ["すぐ友だちに話す", "A"], b: ["しばらく誰にも言わない", "C"] },
+  { q: "好きな人からの返信が来ない…", a: ["何度もスマホを見てしまう", "H"], b: ["そのうち来ると思って気にしない", "L"] },
+  { q: "人を好きになるのは？", a: ["何度も話して、相手を知ってから", "S"], b: ["出会った瞬間に、ビビッと", "F"] },
+  { q: "好きな人のSNSを見つけたら？", a: ["フォローして、いいねもする", "A"], b: ["こっそり見るだけ", "C"] },
+  { q: "好きな人が好きなものは？", a: ["自分も全部チェックする", "H"], b: ["「へえ」と思うくらい", "L"] },
+  { q: "「いいかも」から「好き」になるまで？", a: ["何週間も、何か月もかかる", "S"], b: ["数日あれば十分", "F"] },
+  { q: "好きな気持ちは？", a: ["顔や態度に出てしまう", "A"], b: ["ポーカーフェイスで隠せる", "C"] },
+  { q: "恋をしているときの、ほかの予定は？", a: ["恋が最優先になりがち", "H"], b: ["いつもどおり大事にする", "L"] },
+  { q: "好きになるきっかけは？", a: ["やさしさや中身に気づいたとき", "S"], b: ["声や雰囲気、ふとした仕草", "F"] },
+  { q: "気になる人がいる飲み会では？", a: ["隣の席をねらって動く", "A"], b: ["遠くから様子を見る", "C"] },
+  { q: "恋が終わったら？", a: ["気持ちの整理に時間がかかる", "H"], b: ["わりと早く切り替えられる", "L"] },
+  { q: "好きな人のどこが好き？", a: ["知るほど好きなところが増えていく", "S"], b: ["最初に惹かれたところがいちばん", "F"] },
+];
+
+const TYPES = {
+  AHS: { emoji: "🍯", name: "はちみつ型", catch: "じわじわ甘く、深くハマる人",
+    desc: "【沼り度 88%】最初は「いい人だな」くらいだったのに、話すたびに好きが積もっていくタイプ。気づいたときには毎日その人のことを考えていて、まわりにもバレバレです。",
+    good: "好きになった理由をいくらでも語れるほど、相手のことをよく見ています。その一途さは、相手にも伝わっているはず。",
+    care: "生活の中心が相手になりがち。自分の予定や友だちとの時間も、同じくらい大事に。" },
+  AHF: { emoji: "🔥", name: "火の玉型", catch: "一瞬で落ちて、全力で走る人",
+    desc: "【沼り度 95%】出会って数分で「この人だ」と決まってしまうタイプ。好きになったら気持ちも行動も止まらず、まっすぐ相手に向かっていきます。",
+    good: "迷わず気持ちを伝えられる行動力。好きな人のために動けるエネルギーは、8タイプでいちばんです。",
+    care: "スピードが速すぎて、相手が追いつけないことも。返事を待つ時間も楽しんで。" },
+  ALS: { emoji: "🍵", name: "ほうじ茶型", catch: "ほどよい「好き」を長く続ける人",
+    desc: "【沼り度 35%】恋をしても自分のペースを崩さない、落ち着いたタイプ。会話や時間をゆっくり楽しみながら、ちょうどいい温度の「好き」を長く続けます。",
+    good: "恋も仕事も趣味も、バランスよく大事にできるところ。いっしょにいる人をほっとさせる安心感があります。",
+    care: "落ち着きすぎて「本当に好き？」と思われることも。ときどき言葉で伝えて。" },
+  ALF: { emoji: "🦋", name: "ちょうちょ型", catch: "すぐときめいて、ひらりと次へ行く人",
+    desc: "【沼り度 40%】ときめきセンサーが敏感で、素敵な人を見つけるのが得意なタイプ。ただし深みにはまる前に、ひらりと気持ちが切り替わります。",
+    good: "恋を明るく楽しめるところ。重くならないので、まわりからも話しやすい人だと思われています。",
+    care: "ときめきが多いぶん、本命を見逃しがち。「この人は」と思ったら少し立ち止まって。" },
+  CHS: { emoji: "🌿", name: "ツタ型", catch: "静かに根を張って、抜け出せなくなる人",
+    desc: "【沼り度 85%】表には出さないまま、心の中で好きが静かに育っていくタイプ。誰にも言わないうちに、気づけば抜け出せないくらい深くハマっています。",
+    good: "相手の小さな変化や好きなものに気づける、やさしい観察眼。長く大切に想い続けられる人です。",
+    care: "ひとりで想いを抱えこみがち。友だちに恋バナをすると、新しい気づきがあるかも。" },
+  CHF: { emoji: "🌊", name: "深海型", catch: "一目で落ちて、静かに深く沈む人",
+    desc: "【沼り度 92%】ひと目見た瞬間に心をつかまれるのに、そのことを誰にも言わないタイプ。表面は静かでも、心の中ではどんどん想いが深くなっていきます。",
+    good: "好きになったら一途で、ほかの人が目に入らなくなるほどの集中力。その本気さは、きっと伝わります。",
+    care: "想像の中で相手を理想化しすぎることも。実際に話す時間をつくってみて。" },
+  CLS: { emoji: "🐢", name: "かめ型", catch: "ゆっくり慎重、でも好きになったら長い人",
+    desc: "【沼り度 45%】好きになるまでに時間がかかる、慎重派のタイプ。相手のことをじっくり見きわめてから、少しずつ心を開いていきます。",
+    good: "簡単には流されないので、選んだ相手を大切にできます。始まるまでは遅くても、始まったら長続きしやすいタイプです。",
+    care: "慎重すぎてチャンスを逃すことも。「いいな」と思ったら、小さな一歩を早めに。" },
+  CLF: { emoji: "🎐", name: "風鈴型", catch: "ちりんとときめいて、心の中で楽しむ人",
+    desc: "【沼り度 30%】ふとした瞬間にときめくけれど、表にも出さず、深追いもしないタイプ。心の中でそっとときめきを楽しめる、軽やかな人です。",
+    good: "恋に振り回されない自由さ。ひとりの時間も楽しめるので、いっしょにいる相手も気が楽です。",
+    care: "気持ちを見せないので、相手に気づかれにくいことも。たまには「楽しかった」をひとこと。" },
+};
+
+// 相性◎: 表に出す/秘める と のめり込む/ブレーキ が逆、ハマり方（じわじわ/一瞬）は同じ（火の玉↔風鈴、はちみつ↔かめ など）
+function bestMatch(code) {
+  const flip = { A: "C", C: "A", H: "L", L: "H" };
+  return flip[code[0]] + flip[code[1]] + code[2];
+}
+
+const $ = (id) => document.getElementById(id);
+let idx = 0;
+let answers = [];
+
+function show(id) {
+  ["start", "quiz", "result"].forEach((s) => $(s).classList.add("hidden"));
+  $(id).classList.remove("hidden");
+  $(id).classList.remove("fade"); void $(id).offsetWidth; $(id).classList.add("fade");
+  window.scrollTo(0, 0);
+}
+
+function renderQuestion() {
+  const item = QUESTIONS[idx];
+  $("question").textContent = `Q${idx + 1}. ${item.q}`;
+  $("optA").textContent = item.a[0];
+  $("optB").textContent = item.b[0];
+  $("count").textContent = `${idx + 1} / ${QUESTIONS.length}`;
+  $("bar").style.width = `${(idx / QUESTIONS.length) * 100}%`;
+  $("backBtn").style.visibility = idx === 0 ? "hidden" : "visible";
+}
+
+function answer(choice) {
+  answers[idx] = QUESTIONS[idx][choice][1];
+  idx++;
+  if (idx < QUESTIONS.length) renderQuestion();
+  else showResult(calcType());
+}
+
+function calcType() {
+  const score = {};
+  answers.forEach((k) => (score[k] = (score[k] || 0) + 1));
+  // 各軸4問。2対2の同点は「1問目の回答」を優先
+  const pick = (x, y) => {
+    const sx = score[x] || 0, sy = score[y] || 0;
+    if (sx !== sy) return sx > sy ? x : y;
+    return answers.find((k) => k === x || k === y);
+  };
+  return pick("A", "C") + pick("H", "L") + pick("S", "F");
+}
+
+function showResult(code) {
+  const t = TYPES[code];
+  const m = TYPES[bestMatch(code)];
+  $("rEmoji").textContent = t.emoji;
+  $("rName").textContent = t.name;
+  $("rCatch").textContent = t.catch;
+  $("rDesc").textContent = t.desc;
+  $("rGood").textContent = t.good;
+  $("rCare").textContent = t.care;
+  $("rMatch").textContent = `${m.emoji} ${m.name}（${m.catch}）`;
+  $("bar").style.width = "100%";
+  track("quiz_complete", { result_type: code, result_name: t.name });
+  // タイプ別ページ（r/<code>/）を共有すると、X にタイプ別の画像カードが出る
+  const base = location.href.split("#")[0].split("?")[0].replace(/index\.html$/, "").replace(/\/?$/, "/");
+  const url = base + "r/" + code.toLowerCase() + "/";
+  const text = `私の沼りタイプは「${t.emoji}${t.name}」でした！\n${t.catch}\n相性◎は${m.emoji}${m.name}\n\n#沼りやすさ診断\n`;
+  $("shareBtn").onclick = () => {
+    track("share_click", { result_type: code, method: "x" });
+    const shareUrl = "https://x.com/intent/post?text=" + encodeURIComponent(text) +
+      (url.startsWith("http") ? "&url=" + encodeURIComponent(url) : "") + "&via=pocket_shindan";
+    window.open(shareUrl, "_blank", "noopener");
+  };
+  // LINE・その他のアプリ・コピーのボタン（/share.js）
+  if (window.pocketShareSet) pocketShareSet({ text, url, code });
+  show("result");
+}
+
+$("startBtn").onclick = () => { track("quiz_start"); idx = 0; answers = []; renderQuestion(); show("quiz"); };
+$("optA").onclick = () => answer("a");
+$("optB").onclick = () => answer("b");
+$("backBtn").onclick = () => { if (idx > 0) { idx--; renderQuestion(); } };
+$("retryBtn").onclick = () => show("start");
+$("followBtn").onclick = () => track("follow_click", { position: "bottom" });
+</script>
+<script src="/share.js" defer></script>
+<script src="/others.js" defer></script>
+</body>
+</html>
