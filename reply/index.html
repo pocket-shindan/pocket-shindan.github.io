@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>返信タイプ診断｜12問であなたの返信のクセがわかる</title>
+<meta name="description" content="12問・約1分。メッセージアプリやDMの返信のクセから、あなたのタイプを8タイプで診断します。相性のいいタイプもわかる！">
+<meta property="og:title" content="返信タイプ診断｜12問であなたの返信のクセがわかる">
+<meta property="og:description" content="12問・約1分。あなたの返信のクセを8タイプから診断します。">
+<meta name="pocket:date" content="2026-11-24">
+<meta name="pocket:color" content="#2f7de1">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pocket-shindan.github.io/reply/">
+<link rel="canonical" href="https://pocket-shindan.github.io/reply/">
+<meta property="og:image" content="https://pocket-shindan.github.io/reply/ogp.png">
+<meta property="og:site_name" content="pocket-shindan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pocket-shindan.github.io/reply/ogp.png">
+<script>
+  // 手元の確認（localhost やファイル直開き）は計測しない。本番だけ計測する
+  const GA_ID = location.hostname.endsWith("github.io") ? "G-SWK4ZXGYWH" : "";
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  function track(name, params) { if (GA_ID) gtag("event", name, Object.assign({ quiz: "reply" }, params || {})); }
+  if (GA_ID) {
+    const s = document.createElement("script");
+    s.async = true; s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+    document.head.appendChild(s);
+    gtag("js", new Date()); gtag("config", GA_ID);
+  }
+</script>
+<style>
+  :root {
+    --bg1: #eef6ff; --bg2: #fdeef3;
+    --card: #ffffff; --ink: #1f2e3d; --sub: #6b7d8f;
+    --accent: #2f7de1; --accent2: #5aa2f0; --green: #e1547a; --line: #d6e6f7;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; color: var(--ink);
+    font-family: "Hiragino Maru Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+    background: linear-gradient(160deg, var(--bg1), var(--bg2));
+    display: flex; justify-content: center; padding: 24px 16px 48px;
+  }
+  .wrap { width: 100%; max-width: 480px; }
+  .card {
+    background: var(--card); border-radius: 24px; padding: 28px 22px;
+    box-shadow: 0 10px 30px rgba(47, 125, 225, .14);
+    border-top: 6px solid var(--green);
+  }
+  h1 { font-size: 24px; margin: 8px 0 6px; text-align: center; letter-spacing: .02em; }
+  .lead { text-align: center; color: var(--sub); margin: 0 0 22px; line-height: 1.7; }
+  .hero { font-size: 56px; text-align: center; margin-top: 4px; }
+  button {
+    font: inherit; cursor: pointer; border: none; width: 100%;
+    border-radius: 999px; padding: 15px 18px; font-weight: 700; font-size: 16px;
+    transition: transform .08s ease, box-shadow .15s ease, background .15s;
+  }
+  button:active { transform: scale(.98); }
+  .primary { background: linear-gradient(90deg, var(--accent), var(--accent2)); color: #fff; box-shadow: 0 6px 16px rgba(47, 125, 225, .3); }
+  .ghost { background: transparent; color: var(--sub); font-weight: 500; margin-top: 10px; }
+  .progress { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; margin-bottom: 8px; }
+  .bar { height: 100%; width: 0; background: linear-gradient(90deg, var(--green), #f09ab0); transition: width .25s ease; }
+  .count { font-size: 13px; color: var(--sub); text-align: right; margin-bottom: 18px; }
+  .q { font-size: 20px; font-weight: 700; line-height: 1.6; margin: 0 0 22px; min-height: 64px; }
+  .opt {
+    background: #fff; color: var(--ink); border: 2px solid var(--line); text-align: left;
+    border-radius: 16px; padding: 16px 18px; margin-bottom: 12px; font-weight: 600;
+  }
+  .opt:hover { border-color: var(--accent2); background: #f3f8ff; }
+  .r-emoji { font-size: 72px; text-align: center; line-height: 1.1; }
+  .r-label { text-align: center; color: var(--sub); font-size: 14px; margin-top: 10px; }
+  .r-name { text-align: center; font-size: 28px; font-weight: 800; margin: 4px 0 4px; color: var(--accent); }
+  .r-catch { text-align: center; font-weight: 700; margin: 0 0 18px; }
+  .r-desc { line-height: 1.85; margin: 0 0 18px; }
+  .box { border-radius: 16px; padding: 14px 16px; margin-bottom: 12px; line-height: 1.75; }
+  .box b { display: block; margin-bottom: 4px; }
+  .good { background: #eaf3ff; }
+  .care { background: #f7f4ee; }
+  .match { background: #fdeef3; }
+  .share { background: #111; color: #fff; margin-top: 8px; }
+  .follow { display: block; text-align: center; margin-top: 10px; padding: 13px 18px; border-radius: 999px; border: 2px solid var(--accent); color: var(--accent); font-weight: 700; text-decoration: none; }
+  .follow:hover { background: var(--line); }
+  .note { font-size: 12px; color: var(--sub); text-align: center; margin-top: 18px; line-height: 1.7; }
+  .hidden { display: none; }
+  .fade { animation: fade .25s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="start" class="card fade">
+    <div class="hero">💬</div>
+    <h1>返信タイプ診断</h1>
+    <p class="lead">12問・約1分。<br>あなたの返信のクセを<br>8タイプから診断します。<br>相性のいいタイプもわかるよ。</p>
+    <button class="primary" id="startBtn">診断をはじめる</button>
+    <p class="note">※エンタメ目的の診断です。どのメッセージアプリやDMにも当てはまります</p>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="count" id="count"></div>
+    <p class="q" id="question"></p>
+    <button class="opt" id="optA"></button>
+    <button class="opt" id="optB"></button>
+    <button class="ghost" id="backBtn">← ひとつ戻る</button>
+  </section>
+
+  <section id="result" class="card hidden">
+    <div class="r-emoji" id="rEmoji"></div>
+    <div class="r-label">あなたの返信タイプは…</div>
+    <div class="r-name" id="rName"></div>
+    <p class="r-catch" id="rCatch"></p>
+    <div id="pocket-follow-top"></div>
+    <p class="r-desc" id="rDesc"></p>
+    <div class="box good"><b>💚 返信のいいところ</b><span id="rGood"></span></div>
+    <div class="box care"><b>⚠️ ちょっと意識してみたいこと</b><span id="rCare"></span></div>
+    <div class="box match"><b>🤝 相性◎のタイプ（正反対で、おたがいを補い合う）</b><span id="rMatch"></span></div>
+    <div id="pocket-pair"></div>
+    <button class="primary share" id="shareBtn">𝕏 で結果をシェアする</button>
+    <div id="pocket-share"></div>
+    <a class="follow" id="followBtn" href="https://x.com/intent/follow?screen_name=pocket_shindan" target="_blank" rel="noopener">＋ フォローして新しい診断を受け取る</a>
+    <button class="ghost" id="retryBtn">もう一度診断する</button>
+    <div id="pocket-others"></div>
+    <p class="note">※エンタメ目的の診断です<br>※アクセス解析に Google アナリティクスを使用しています（個人を特定する情報は収集しません）</p>
+  </section>
+
+</div>
+
+<script>
+// 軸: A=スタンプ・絵文字派 / C=文字だけ派, H=すぐ返す / L=あとで返す, S=長めにていねい / F=短くひとこと
+const QUESTIONS = [
+  { q: "友だちへの返信、よく使うのは？", a: ["スタンプや絵文字", "A"], b: ["文字だけ", "C"] },
+  { q: "通知が来たら？", a: ["すぐ開いて返す", "H"], b: ["手が空いたときに返す", "L"] },
+  { q: "返信の長さは？", a: ["長めにていねいに", "S"], b: ["短くひとこと", "F"] },
+  { q: "文末は？", a: ["「！」や「笑」をつけがち", "A"], b: ["シンプルに言い切る", "C"] },
+  { q: "返事を待っているとき", a: ["返事が気になって、つい画面を開く", "H"], b: ["気にせず自分のことをする", "L"] },
+  { q: "友だちに相談されたら？", a: ["ゆっくり気持ちを聞いて、長めに書く", "S"], b: ["必要なことをかんたんに返す", "F"] },
+  { q: "うれしいことがあったら？", a: ["スタンプをいくつも送る", "A"], b: ["「うれしい」と文字で伝える", "C"] },
+  { q: "返信が遅れてしまったとき", a: ["遅れたことに、自分から触れる", "H"], b: ["何も言わず、いつもどおり返す", "L"] },
+  { q: "遊びに誘われたら？", a: ["日にちや場所まで書いて返す", "S"], b: ["「いいね、行く」くらいで返す", "F"] },
+  { q: "友だちから写真が届いたら？", a: ["絵文字つきで返す", "A"], b: ["文字だけで返す", "C"] },
+  { q: "夜にメッセージが来たら？", a: ["その日のうちに返したい", "H"], b: ["次の日でも大丈夫", "L"] },
+  { q: "会話の終わり方は？", a: ["「今日はありがとう、またね」まで書く", "S"], b: ["「了解」くらいで終える", "F"] },
+];
+
+const TYPES = {
+  AHS: { emoji: "🐶", name: "わんこ型", catch: "すぐ返して、気持ちもたっぷり送る人",
+    desc: "通知が鳴ったらしっぽを振る勢いで返信するタイプ。スタンプも文章も盛りだくさんで、気持ちをまっすぐ届けます。",
+    good: "返信が早くてあたたかいので、送った相手がうれしくなります。やりとりの空気を明るくする名人です。",
+    care: "全力で返すぶん、相手の返事が遅いとそわそわしがち。待つ時間も、のんびり楽しんで。" },
+  AHF: { emoji: "🐦", name: "小鳥型", catch: "すぐ返す、軽やかなひとこと派",
+    desc: "届いたらすぐ「いいね！」「りょ！」とスタンプつきで返すタイプ。短くてテンポがよく、会話がぽんぽん弾みます。",
+    good: "軽さと速さで、気軽にやりとりできる人。グループの返信担当としても頼られています。",
+    care: "短い返事が続くと、気持ちが見えにくいことも。大事な話のときは、少し長めに書いてみて。" },
+  ALS: { emoji: "🛋️", name: "こたつ型", catch: "マイペースに、あとからたっぷり返す人",
+    desc: "返信はマイペース。でも返すときはスタンプも文章も盛りだくさんで、「待たせた分、たっぷり」になるタイプです。",
+    good: "自分のペースを大切にしながら、返すときは気持ちを込めてくれる人。長いメッセージはうれしいごほうびです。",
+    care: "返信までの間が空くと、待つ人もいるかも。ひとこと「あとで返すね」を添えるとやわらかく伝わります。" },
+  ALF: { emoji: "🫧", name: "しゃぼん玉型", catch: "ふわっとスタンプだけ、軽く返す人",
+    desc: "気づいたときにスタンプをひとつ、ふわっと返すタイプ。重くならない距離感で、だれとでも気楽につながります。",
+    good: "プレッシャーを感じさせない軽やかさ。やりとりを負担にしない空気が、人を安心させます。",
+    care: "スタンプだけの日が続いたら、ときどき文字で「ありがとう」を足してみて。" },
+  CHS: { emoji: "🦉", name: "ふくろう型", catch: "すぐ、ていねいな文章で返す人",
+    desc: "通知に気づいたら、文字だけで落ち着いて、しっかり返すタイプ。相談ごとにも、考えた言葉で向き合います。",
+    good: "返信が早くて中身もていねい。信頼できる相談相手として、まわりから頼りにされています。",
+    care: "しっかり書きすぎて、相手が返信に気をつかうことも。ときどき短い返事もまぜてみて。" },
+  CHF: { emoji: "🏓", name: "ピンポン型", catch: "すぐ、簡潔に返すテンポ重視の人",
+    desc: "「了解」「ありがとう」と、短い文字でぱっと返すタイプ。やりとりが速くて、用件がすぐ片づきます。",
+    good: "返事を待たせないので、連絡が取りやすい人。仕事や予定の相談もスムーズに進みます。",
+    care: "返事が簡潔なので、そっけなく感じる人もいるかも。ひとことスタンプを足すと、印象がやわらぎます。" },
+  CLS: { emoji: "🍷", name: "ワイン型", catch: "ゆっくり、熟成させた文章で返す人",
+    desc: "返信までに時間はかかるけれど、届くのは文字でじっくり書いた長めのメッセージ。言葉を選んで返すタイプです。",
+    good: "考えてから返すので、ひとつひとつの言葉に深みがあります。もらった人の心に残る返信です。",
+    care: "返事を待つ側は気になることも。「ちゃんと読んだよ」のひとことを先に送ると安心されます。" },
+  CLF: { emoji: "🗿", name: "モアイ型", catch: "ゆっくり、ひとことだけ返す人",
+    desc: "返信は遅めで、届くのはシンプルなひとこと。でも、その短い言葉に気持ちがこもっているタイプです。",
+    good: "無理に取りつくろわない、飾らない人。言葉が少ないぶん、ひとことの重みがあります。",
+    care: "ひとことだけだと、気分が見えにくいことも。大事な場面では、もうひと言添えてみて。" },
+};
+
+// 相性◎: スタンプ派/文字派 と 返信の速さ が逆、返信の長さは同じ（わんこ↔ワイン、小鳥↔モアイ など）
+function bestMatch(code) {
+  const flip = { A: "C", C: "A", H: "L", L: "H" };
+  return flip[code[0]] + flip[code[1]] + code[2];
+}
+
+const $ = (id) => document.getElementById(id);
+let idx = 0;
+let answers = [];
+
+function show(id) {
+  ["start", "quiz", "result"].forEach((s) => $(s).classList.add("hidden"));
+  $(id).classList.remove("hidden");
+  $(id).classList.remove("fade"); void $(id).offsetWidth; $(id).classList.add("fade");
+  window.scrollTo(0, 0);
+}
+
+function renderQuestion() {
+  const item = QUESTIONS[idx];
+  $("question").textContent = `Q${idx + 1}. ${item.q}`;
+  $("optA").textContent = item.a[0];
+  $("optB").textContent = item.b[0];
+  $("count").textContent = `${idx + 1} / ${QUESTIONS.length}`;
+  $("bar").style.width = `${(idx / QUESTIONS.length) * 100}%`;
+  $("backBtn").style.visibility = idx === 0 ? "hidden" : "visible";
+}
+
+function answer(choice) {
+  answers[idx] = QUESTIONS[idx][choice][1];
+  idx++;
+  if (idx < QUESTIONS.length) renderQuestion();
+  else showResult(calcType());
+}
+
+function calcType() {
+  const score = {};
+  answers.forEach((k) => (score[k] = (score[k] || 0) + 1));
+  // 各軸4問。2対2の同点は「1問目の回答」を優先
+  const pick = (x, y) => {
+    const sx = score[x] || 0, sy = score[y] || 0;
+    if (sx !== sy) return sx > sy ? x : y;
+    return answers.find((k) => k === x || k === y);
+  };
+  return pick("A", "C") + pick("H", "L") + pick("S", "F");
+}
+
+function showResult(code) {
+  const t = TYPES[code];
+  const m = TYPES[bestMatch(code)];
+  $("rEmoji").textContent = t.emoji;
+  $("rName").textContent = t.name;
+  $("rCatch").textContent = t.catch;
+  $("rDesc").textContent = t.desc;
+  $("rGood").textContent = t.good;
+  $("rCare").textContent = t.care;
+  $("rMatch").textContent = `${m.emoji} ${m.name}（${m.catch}）`;
+  $("bar").style.width = "100%";
+  track("quiz_complete", { result_type: code, result_name: t.name });
+  // タイプ別ページ（r/<code>/）を共有すると、X にタイプ別の画像カードが出る
+  const base = location.href.split("#")[0].split("?")[0].replace(/index\.html$/, "").replace(/\/?$/, "/");
+  const url = base + "r/" + code.toLowerCase() + "/";
+  const text = `私の返信タイプは「${t.emoji}${t.name}」でした！\n${t.catch}\n相性◎は${m.emoji}${m.name}\n\n#返信タイプ診断\n`;
+  $("shareBtn").onclick = () => {
+    track("share_click", { result_type: code, method: "x" });
+    const shareUrl = "https://x.com/intent/post?text=" + encodeURIComponent(text) +
+      (url.startsWith("http") ? "&url=" + encodeURIComponent(url) : "") + "&via=pocket_shindan";
+    window.open(shareUrl, "_blank", "noopener");
+  };
+  // LINE・その他のアプリ・コピーのボタン（/share.js）
+  if (window.pocketShareSet) pocketShareSet({ text, url, code });
+  show("result");
+}
+
+$("startBtn").onclick = () => { track("quiz_start"); idx = 0; answers = []; renderQuestion(); show("quiz"); };
+$("optA").onclick = () => answer("a");
+$("optB").onclick = () => answer("b");
+$("backBtn").onclick = () => { if (idx > 0) { idx--; renderQuestion(); } };
+$("retryBtn").onclick = () => show("start");
+$("followBtn").onclick = () => track("follow_click", { position: "bottom" });
+</script>
+<script src="/share.js" defer></script>
+<script src="/others.js" defer></script>
+</body>
+</html>
