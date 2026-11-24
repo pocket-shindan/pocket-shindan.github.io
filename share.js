@@ -53,11 +53,42 @@
   }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function tname(c) { var t = TYPES[c]; return t.emoji + t.name; }
+  function baseUrl() { return location.href.split("#")[0].split("?")[0].replace(/index\.html$/, "").replace(/\/?$/, "/"); }
+  var pbtn = "display:block;width:100%;box-sizing:border-box;text-align:center;margin-top:8px;padding:12px 16px;border-radius:999px;font-weight:700;font-size:15px;cursor:pointer;text-decoration:none;font-family:inherit;";
+  // 2人の相性のカード（a＝誘った人、b＝リンクから診断した人）
+  function pairCard(a, b, title) {
+    var s = pairScore(a, b);
+    return '<div style="margin:14px 0 6px;padding:14px;border-radius:16px;background:linear-gradient(135deg,#fff0f5,#f3f0ff);text-align:center">' +
+      '<div style="font-size:13px;color:#888">' + esc(title) + '</div>' +
+      '<div style="font-size:15px;font-weight:700;margin:4px 0">' + esc(tname(a)) + ' × ' + esc(tname(b)) + '</div>' +
+      '<div style="font-size:30px;font-weight:800;color:#e91e63">' + s.mark + ' ' + s.pct + '%</div>' +
+      '<div style="font-weight:700;margin:2px 0 6px">' + esc(s.word) + '</div>' +
+      '<div style="font-size:13px;color:#555;line-height:1.7;text-align:left">' + esc(s.note) + '</div></div>';
+  }
+  // コピー（https でないときの予備つき）
+  function copyText(text, el, label) {
+    var done = function () { el.textContent = "コピーしました ✓"; setTimeout(function () { el.textContent = label; }, 2000); };
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, function () {});
+    else { var ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); done(); } catch (e) {} ta.remove(); }
+  }
+  // 相性の結果を見せるリンク ?duo=<誘った人>-<診断した人>（2026-11-25〜）
+  // 相性を出した人が「この相性を相手に送る」で送る。開いた人は診断しなくても2人の相性が見られる
+  var duo = (function () {
+    try { var v = (new URLSearchParams(location.search).get("duo") || "").toUpperCase().split("-"); return v.length === 2 ? v : []; } catch (e) { return []; }
+  })();
   // 友だちから届いたリンクで開いたとき：はじめの画面に案内を出す
   document.addEventListener("DOMContentLoaded", function () {
-    if (!pairValid(pairFrom)) return;
     var start = document.getElementById("start");
-    if (!start) return;
+    if (start && duo.length === 2 && pairValid(duo[0]) && pairValid(duo[1])) {   // 相性の結果が届いた人
+      var r = document.createElement("div");
+      r.innerHTML = '<div style="text-align:center;font-weight:700;color:#c2185b;font-size:14px">💞 相性の結果が届きました！</div>' +
+        pairCard(duo[0], duo[1], "2人の相性") +
+        '<div style="text-align:center;font-size:12px;color:#888;margin:6px 0 14px">下の「診断をはじめる」で、自分でも遊べます</div>';
+      start.insertBefore(r, start.firstChild);
+      if (typeof track === "function") track("pair_view", { from_type: duo[0], result_type: duo[1] });
+      return;
+    }
+    if (!pairValid(pairFrom) || !start) return;
     var b = document.createElement("div");
     b.style.cssText = "margin:0 0 14px;padding:12px;border-radius:14px;background:#fff4f8;border:2px dashed #ff8fb1;color:#c2185b;font-weight:700;font-size:14px;line-height:1.6;text-align:center;";
     b.innerHTML = "💌 " + esc(tname(pairFrom)) + " の友だちから<br>相性チェックが届きました！<br><span style='font-weight:500;color:#666;font-size:12px'>診断すると、2人の相性がわかります</span>";
@@ -68,27 +99,38 @@
     var box = document.getElementById("pocket-pair");
     if (!box || !hasTypes()) return;
     var html = "";
-    if (pairValid(pairFrom)) {   // 友だちのリンクから来た人：2人の相性を出す
+    var base = baseUrl();
+    var duoLink = "", duoMsg = "";
+    if (pairValid(pairFrom)) {   // 友だちのリンクから来た人：2人の相性を出す＋その結果を相手に送れる
       var s = pairScore(pairFrom, code);
-      html += '<div style="margin:14px 0 6px;padding:14px;border-radius:16px;background:linear-gradient(135deg,#fff0f5,#f3f0ff);text-align:center">' +
-        '<div style="font-size:13px;color:#888">友だちとの相性</div>' +
-        '<div style="font-size:15px;font-weight:700;margin:4px 0">' + esc(tname(pairFrom)) + ' × ' + esc(tname(code)) + '</div>' +
-        '<div style="font-size:30px;font-weight:800;color:#e91e63">' + s.mark + ' ' + s.pct + '%</div>' +
-        '<div style="font-weight:700;margin:2px 0 6px">' + esc(s.word) + '</div>' +
-        '<div style="font-size:13px;color:#555;line-height:1.7;text-align:left">' + esc(s.note) + '</div></div>';
+      html += pairCard(pairFrom, code, "友だちとの相性");
+      duoLink = base + "?duo=" + pairFrom.toLowerCase() + "-" + code.toLowerCase() + "&utm_source=pair&utm_medium=result";
+      duoMsg = "相性診断やったよ！\n" + tname(pairFrom) + " × " + tname(code) + "\n" + s.mark + " " + s.pct + "%「" + s.word + "」だって💞\n結果はこちら👇";
+      html += '<div style="padding:12px;border-radius:16px;border:2px solid #e91e63;background:#fff">' +
+        '<div style="font-weight:700;text-align:center">💌 この相性を相手に送る</div>' +
+        '<div style="font-size:12px;color:#888;text-align:center;margin:2px 0 4px">リンクを開くと、相手も2人の相性が見られます</div>' +
+        '<a id="duoLine" target="_blank" rel="noopener" style="' + pbtn + 'background:#06C755;color:#fff;border:none" href="https://social-plugins.line.me/lineit/share?url=' + encodeURIComponent(duoLink) + '&text=' + encodeURIComponent(duoMsg) + '">LINE で相手に送る</a>' +
+        '<button type="button" id="duoMore" style="' + pbtn + 'background:#fff;color:#333;border:2px solid #ccc">' + (navigator.share ? "その他のアプリで送る" : "結果とリンクをコピー") + '</button></div>';
       if (typeof track === "function") track("pair_result", { from_type: pairFrom, result_type: code, mark: s.mark });
     }
     // だれでも：自分のタイプ付きのリンクを友だちに送る
-    var base = location.href.split("#")[0].split("?")[0].replace(/index\.html$/, "").replace(/\/?$/, "/");
     var link = base + "?pair=" + code.toLowerCase() + "&utm_source=pair&utm_medium=" + "invite";
     var msg = "私は「" + tname(code) + "」だったよ！\nあなたとの相性、診断してみて👇";
-    var pbtn = "display:block;width:100%;box-sizing:border-box;text-align:center;margin-top:8px;padding:12px 16px;border-radius:999px;font-weight:700;font-size:15px;cursor:pointer;text-decoration:none;font-family:inherit;";
     html += '<div style="margin-top:14px;padding:12px;border-radius:16px;border:2px solid #ffb3c8;background:#fff">' +
       '<div style="font-weight:700;text-align:center">💞 友だちとの相性を見る</div>' +
       '<div style="font-size:12px;color:#888;text-align:center;margin:2px 0 4px">このリンクから友だちが診断すると、2人の相性が出ます</div>' +
       '<a id="pairLine" target="_blank" rel="noopener" style="' + pbtn + 'background:#06C755;color:#fff;border:none" href="https://social-plugins.line.me/lineit/share?url=' + encodeURIComponent(link) + '&text=' + encodeURIComponent(msg) + '">LINE で友だちに送る</a>' +
       '<button type="button" id="pairMore" style="' + pbtn + 'background:#fff;color:#333;border:2px solid #ccc">' + (navigator.share ? "その他のアプリで送る" : "リンクをコピーして送る") + '</button></div>';
     box.innerHTML = html;
+    if (duoLink) {
+      document.getElementById("duoLine").onclick = function () { if (typeof track === "function") track("pair_share", { from_type: pairFrom, result_type: code, method: "line" }); };
+      var dm = document.getElementById("duoMore");
+      dm.onclick = function () {
+        if (typeof track === "function") track("pair_share", { from_type: pairFrom, result_type: code, method: navigator.share ? "native" : "copy" });
+        if (navigator.share) { navigator.share({ text: duoMsg, url: duoLink }).catch(function () {}); return; }
+        copyText(duoMsg + "\n" + duoLink, dm, "結果とリンクをコピー");
+      };
+    }
     document.getElementById("pairLine").onclick = function () { if (typeof track === "function") track("pair_invite", { result_type: code, method: "line" }); };
     var more = document.getElementById("pairMore");
     more.onclick = function () {
