@@ -65,6 +65,42 @@
       '<div style="font-weight:700;margin:2px 0 6px">' + esc(s.word) + '</div>' +
       '<div style="font-size:13px;color:#555;line-height:1.7;text-align:left">' + esc(s.note) + '</div></div>';
   }
+  // LINE に「文＋リンク」を渡す（2026-11-25〜）。前の social-plugins.line.me/lineit/share は URL しか渡せず、文が届いていなかった
+  function lineHref(text, url) { return "https://line.me/R/share?text=" + encodeURIComponent(text + (url ? "\n" + url : "")); }
+  function quizName() { return (document.title || "").split(/[｜|]/)[0].trim() || "ポケット診断"; }
+  // 2人の相性の画像（1080×1080）をその場で作る（2026-11-25〜）
+  function pairImage(a, b, cb) {
+    try {
+      var s = pairScore(a, b), W = 1080, c = document.createElement("canvas");
+      c.width = W; c.height = W;
+      var x = c.getContext("2d"), F = '"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif';
+      var g = x.createLinearGradient(0, 0, W, W); g.addColorStop(0, "#ffd6e4"); g.addColorStop(1, "#e4dcff");
+      x.fillStyle = g; x.fillRect(0, 0, W, W);
+      var r = 48, L = 60, T = 60, R = W - 60, B = W - 60;   // 白いカード（角丸）
+      x.beginPath(); x.moveTo(L + r, T); x.lineTo(R - r, T); x.quadraticCurveTo(R, T, R, T + r); x.lineTo(R, B - r); x.quadraticCurveTo(R, B, R - r, B);
+      x.lineTo(L + r, B); x.quadraticCurveTo(L, B, L, B - r); x.lineTo(L, T + r); x.quadraticCurveTo(L, T, L + r, T); x.closePath();
+      x.fillStyle = "#fff"; x.fill();
+      x.textAlign = "center"; x.textBaseline = "middle";
+      var t = function (str, px, color, y, weight) { x.font = (weight || "700") + " " + px + "px " + F; x.fillStyle = color; x.fillText(str, W / 2, y); };
+      t(quizName(), 44, "#c2185b", 150);
+      t("2人の相性", 34, "#888", 210, "500");
+      var ta = TYPES[a], tb = TYPES[b];
+      x.font = "130px " + F; x.fillText(ta.emoji, 300, 350); x.fillText(tb.emoji, 780, 350);
+      x.font = "700 64px " + F; x.fillStyle = "#e91e63"; x.fillText("×", 540, 350);
+      x.font = "700 46px " + F; x.fillStyle = "#333"; x.fillText(ta.name, 300, 470); x.fillText(tb.name, 780, 470);
+      t(s.mark + " " + s.pct + "%", 150, "#e91e63", 610, "800");
+      t(s.word, 58, "#333", 730);
+      x.font = "500 34px " + F; x.fillStyle = "#555";   // ひとこと（折り返し）
+      var line = "", y = 810, chars = Array.from(s.note);
+      for (var i = 0; i < chars.length; i++) {
+        if (x.measureText(line + chars[i]).width > 820) { x.fillText(line, W / 2, y); line = ""; y += 50; }
+        line += chars[i];
+      }
+      if (line) x.fillText(line, W / 2, y);
+      t("pocket-shindan.github.io  @pocket_shindan", 28, "#aaa", 975, "500");
+      c.toBlob(function (blob) { cb(blob); }, "image/png");
+    } catch (e) { cb(null); }
+  }
   // コピー（https でないときの予備つき）
   function copyText(text, el, label) {
     var done = function () { el.textContent = "コピーしました ✓"; setTimeout(function () { el.textContent = label; }, 2000); };
@@ -105,21 +141,22 @@
       var s = pairScore(pairFrom, code);
       html += pairCard(pairFrom, code, "友だちとの相性");
       duoLink = base + "?duo=" + pairFrom.toLowerCase() + "-" + code.toLowerCase() + "&utm_source=pair&utm_medium=result";
-      duoMsg = "相性診断やったよ！\n" + tname(pairFrom) + " × " + tname(code) + "\n" + s.mark + " " + s.pct + "%「" + s.word + "」だって💞\n結果はこちら👇";
+      duoMsg = "【" + quizName() + "】2人の相性が出たよ💞\n" + tname(pairFrom) + "（あなた）× " + tname(code) + "（わたし）\n" + s.mark + " " + s.pct + "%「" + s.word + "」\nくわしい結果はこちら👇";
       html += '<div style="padding:12px;border-radius:16px;border:2px solid #e91e63;background:#fff">' +
         '<div style="font-weight:700;text-align:center">💌 この相性を相手に送る</div>' +
         '<div style="font-size:12px;color:#888;text-align:center;margin:2px 0 4px">リンクを開くと、相手も2人の相性が見られます</div>' +
-        '<a id="duoLine" target="_blank" rel="noopener" style="' + pbtn + 'background:#06C755;color:#fff;border:none" href="https://social-plugins.line.me/lineit/share?url=' + encodeURIComponent(duoLink) + '&text=' + encodeURIComponent(duoMsg) + '">LINE で相手に送る</a>' +
+        '<a id="duoLine" target="_blank" rel="noopener" style="' + pbtn + 'background:#06C755;color:#fff;border:none" href="' + lineHref(duoMsg, duoLink) + '">LINE で相手に送る</a>' +
+        '<button type="button" id="duoImg" style="' + pbtn + 'background:#e91e63;color:#fff;border:none">📷 相性の画像を送る</button>' +
         '<button type="button" id="duoMore" style="' + pbtn + 'background:#fff;color:#333;border:2px solid #ccc">' + (navigator.share ? "その他のアプリで送る" : "結果とリンクをコピー") + '</button></div>';
       if (typeof track === "function") track("pair_result", { from_type: pairFrom, result_type: code, mark: s.mark });
     }
     // だれでも：自分のタイプ付きのリンクを友だちに送る
     var link = base + "?pair=" + code.toLowerCase() + "&utm_source=pair&utm_medium=" + "invite";
-    var msg = "私は「" + tname(code) + "」だったよ！\nあなたとの相性、診断してみて👇";
+    var msg = "【" + quizName() + "】で相性チェックしよう！\nわたしは「" + tname(code) + "」だったよ。\n下のリンクから12問（約1分）答えると、2人の相性がわかるよ💞";
     html += '<div style="margin-top:14px;padding:12px;border-radius:16px;border:2px solid #ffb3c8;background:#fff">' +
       '<div style="font-weight:700;text-align:center">💞 友だちとの相性を見る</div>' +
       '<div style="font-size:12px;color:#888;text-align:center;margin:2px 0 4px">このリンクから友だちが診断すると、2人の相性が出ます</div>' +
-      '<a id="pairLine" target="_blank" rel="noopener" style="' + pbtn + 'background:#06C755;color:#fff;border:none" href="https://social-plugins.line.me/lineit/share?url=' + encodeURIComponent(link) + '&text=' + encodeURIComponent(msg) + '">LINE で友だちに送る</a>' +
+      '<a id="pairLine" target="_blank" rel="noopener" style="' + pbtn + 'background:#06C755;color:#fff;border:none" href="' + lineHref(msg, link) + '">LINE で友だちに送る</a>' +
       '<button type="button" id="pairMore" style="' + pbtn + 'background:#fff;color:#333;border:2px solid #ccc">' + (navigator.share ? "その他のアプリで送る" : "リンクをコピーして送る") + '</button></div>';
     box.innerHTML = html;
     if (duoLink) {
@@ -129,6 +166,29 @@
         if (typeof track === "function") track("pair_share", { from_type: pairFrom, result_type: code, method: navigator.share ? "native" : "copy" });
         if (navigator.share) { navigator.share({ text: duoMsg, url: duoLink }).catch(function () {}); return; }
         copyText(duoMsg + "\n" + duoLink, dm, "結果とリンクをコピー");
+      };
+      var di = document.getElementById("duoImg");
+      di.onclick = function () {
+        var label = di.textContent;
+        di.textContent = "画像を作っています…";
+        pairImage(pairFrom, code, function (blob) {
+          di.textContent = label;
+          if (!blob) return;
+          var file = new File([blob], "aisho.png", { type: "image/png" });
+          var text = duoMsg + "\n" + duoLink;
+          // スマホ：共有メニューで画像を送る（LINE・Instagram など）。できないとき（PC など）は画像を保存する
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            if (typeof track === "function") track("pair_share", { from_type: pairFrom, result_type: code, method: "image" });
+            navigator.share({ files: [file], text: text }).catch(function () {});
+          } else {
+            if (typeof track === "function") track("pair_share", { from_type: pairFrom, result_type: code, method: "image_save" });
+            var a = document.createElement("a");
+            a.href = URL.createObjectURL(blob); a.download = "aisho.png";
+            document.body.appendChild(a); a.click(); a.remove();
+            di.textContent = "画像を保存しました ✓（送るときに添付してね）";
+            setTimeout(function () { di.textContent = label; }, 3500);
+          }
+        });
       };
     }
     document.getElementById("pairLine").onclick = function () { if (typeof track === "function") track("pair_invite", { result_type: code, method: "line" }); };
@@ -152,7 +212,7 @@
     var all = body + (url ? "\n" + url : "");
     box.innerHTML = "";
     var line = document.createElement("a");
-    line.href = "https://social-plugins.line.me/lineit/share?url=" + encodeURIComponent(url || location.href) + "&text=" + encodeURIComponent(body);
+    line.href = lineHref(body, url || location.href);
     line.target = "_blank"; line.rel = "noopener";
     line.style.cssText = btn + "background:#06C755;color:#fff;border:none;";
     line.textContent = "LINE で送る";
