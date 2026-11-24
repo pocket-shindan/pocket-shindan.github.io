@@ -164,7 +164,7 @@
       var dm = document.getElementById("duoMore");
       dm.onclick = function () {
         if (typeof track === "function") track("pair_share", { from_type: pairFrom, result_type: code, method: navigator.share ? "native" : "copy" });
-        if (navigator.share) { navigator.share({ text: duoMsg, url: duoLink }).catch(function () {}); return; }
+        if (navigator.share) { navigator.share({ text: duoMsg + "\n" + duoLink }).catch(function () {}); return; }   // url を別にすると LINE が文を捨てる
         copyText(duoMsg + "\n" + duoLink, dm, "結果とリンクをコピー");
       };
       var di = document.getElementById("duoImg");
@@ -195,7 +195,7 @@
     var more = document.getElementById("pairMore");
     more.onclick = function () {
       if (typeof track === "function") track("pair_invite", { result_type: code, method: navigator.share ? "native" : "copy" });
-      if (navigator.share) { navigator.share({ text: msg, url: link }).catch(function () {}); return; }
+      if (navigator.share) { navigator.share({ text: msg + "\n" + link }).catch(function () {}); return; }   // url を別にすると LINE が文を捨てる
       var all = msg + "\n" + link;
       var done = function () { more.textContent = "コピーしました ✓"; setTimeout(function () { more.textContent = "リンクをコピーして送る"; }, 2000); };
       if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(all).then(done, function () {});
@@ -225,7 +225,7 @@
       nat.textContent = "その他のアプリで共有";
       nat.onclick = function () {
         log("native", d.code);
-        navigator.share({ text: body, url: url || undefined }).catch(function () {});
+        navigator.share({ text: all }).catch(function () {});   // 2026-11-25: url を別にすると LINE が文を捨てる（iPhone で確認）ので、文の中に入れる
       };
       box.appendChild(nat);
     }
