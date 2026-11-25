@@ -14,8 +14,9 @@
     "font-weight:700;font-size:15px;cursor:pointer;text-decoration:none;font-family:inherit;";
   // フォローの呼びかけ（2026-11-17〜。文を変えるときはここだけ直せば全部の診断に反映される。
   // 変えたら _引き継ぎ.md に日付を書いて、GA4 の follow_click を前後で比べる）
-  var FOLLOW_TOP = "🧪 毎日18時、ラボちゃんの研究日誌が届く！\nフォローはこちら →";   // \n で改行
-  var FOLLOW_BOTTOM = "＋ フォローして新しい診断とラボちゃんの研究日誌を受け取る";
+  // 2026-11-26: ラボちゃんの研究日誌が 12/15 から X ではなくサイト（/labo/）になるので、日誌の話を外した（前は「🧪 毎日18時、ラボちゃんの研究日誌が届く！」）
+  var FOLLOW_TOP = "🔔 新しい診断のお知らせが届く！\nフォローはこちら →";   // \n で改行
+  var FOLLOW_BOTTOM = "＋ フォローして新しい診断のお知らせを受け取る";
   var FOLLOW_URL = "https://x.com/intent/follow?screen_name=pocket_shindan";
   function followSet(code) {
     var bottom = document.getElementById("followBtn");
