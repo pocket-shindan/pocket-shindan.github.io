@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- make-labo-site.py が作る。直接直さない（日誌は 20261116_ラボちゃん/01_企画/日誌.json） -->
+<meta name="pocket:kind" content="page">
+<title>ラボちゃんの研究日誌｜ポケット診断</title>
+<meta name="description" content="ポケット診断研究所の新人研究員ラボちゃんの、恋の観察ノートと連載「ラボちゃんの恋は要検証」。毎日更新。">
+<meta property="og:title" content="ラボちゃんの研究日誌｜ポケット診断">
+<meta property="og:description" content="恋の観察ノートと連載「ラボちゃんの恋は要検証」。毎日更新。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pocket-shindan.github.io/labo/">
+<link rel="canonical" href="https://pocket-shindan.github.io/labo/">
+<meta property="og:image" content="https://pocket-shindan.github.io/labo/img/labo_intro.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pocket-shindan.github.io/labo/img/labo_intro.png">
+<script>
+  const GA_ID = location.hostname.endsWith("github.io") ? "G-SWK4ZXGYWH" : "";
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  if (GA_ID) {
+    const s = document.createElement("script");
+    s.async = true; s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+    document.head.appendChild(s);
+    gtag("js", new Date()); gtag("config", GA_ID);
+  }
+</script>
+<style>
+  :root { --ink:#2f2433; --sub:#7d6b80; --pink:#ff5c8a; --violet:#8b6cff; --bg1:#f4efff; --bg2:#ffeef4; }
+  * { box-sizing:border-box; }
+  body { margin:0; color:var(--ink); background:linear-gradient(160deg,var(--bg1),var(--bg2)); min-height:100vh;
+         font-family:"Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic UI","Meiryo",sans-serif; }
+  .wrap { max-width:640px; margin:0 auto; padding:20px 16px 48px; }
+  header { text-align:center; margin:8px 0 18px; }
+  header a.home { font-size:13px; color:var(--sub); text-decoration:none; }
+  header img { width:100%; max-width:480px; border-radius:16px; margin:12px 0 6px; box-shadow:0 6px 20px rgba(90,60,120,.12); }
+  h1 { font-size:22px; margin:6px 0 4px; }
+  .lead { color:var(--sub); font-size:14px; line-height:1.7; margin:0; }
+  .tabs { display:flex; gap:6px; justify-content:center; margin:14px 0 4px; }
+  .tabs button { font:inherit; font-size:13px; border:1px solid #d8cde6; background:#fff; color:var(--sub); border-radius:999px; padding:6px 14px; cursor:pointer; }
+  .tabs button.on { background:var(--violet); color:#fff; border-color:var(--violet); }
+  .entry { background:#fff; border-radius:18px; padding:16px 18px; margin:14px 0; box-shadow:0 4px 16px rgba(90,60,120,.08); }
+  .meta { display:flex; gap:8px; align-items:center; font-size:12px; color:var(--sub); }
+  .kind { font-weight:700; border-radius:999px; padding:2px 10px; color:#fff; background:var(--violet); }
+  .kind.s { background:var(--pink); }
+  .new { color:var(--pink); font-weight:700; }
+  .entry h2 { font-size:17px; margin:8px 0 6px; }
+  .entry img { width:100%; border-radius:12px; margin:6px 0; }
+  .body { white-space:pre-wrap; line-height:1.85; font-size:15px; margin:0; }
+  .go { display:inline-block; margin-top:10px; padding:8px 14px; border-radius:999px; background:var(--pink); color:#fff; text-decoration:none; font-weight:700; font-size:14px; }
+  .more { text-align:center; }
+  .more button { font:inherit; border:2px solid #d8cde6; background:#fff; border-radius:999px; padding:10px 18px; cursor:pointer; color:var(--sub); }
+  .foot { text-align:center; margin-top:28px; font-size:13px; color:var(--sub); line-height:1.9; }
+  .foot a { color:var(--violet); }
+  .cta { display:block; text-align:center; margin:18px 0; padding:14px; border-radius:999px; background:linear-gradient(90deg,var(--pink),var(--violet)); color:#fff; font-weight:700; text-decoration:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="home" href="/">← ポケット診断のトップへ</a>
+    <img src="img/labo_intro.png" alt="ラボちゃん">
+    <h1>🧪 ラボちゃんの研究日誌</h1>
+    <p class="lead">ポケット診断研究所の新人研究員・ラボちゃんの観察ノートです。<br>研究日誌と連載「ラボちゃんの恋は要検証」を、毎日1ページずつ。</p>
+    <div class="tabs"><button data-f="all" class="on">ぜんぶ</button><button data-f="連載">📖 連載だけ</button><button data-f="日誌">📓 日誌だけ</button></div>
+  </header>
+  <div id="list"></div>
+  <div class="more"><button id="moreBtn" hidden>もっと前の日誌を見る</button></div>
+  <a class="cta" href="/#list">🧪 あなたも診断してみる（どれも約1分）</a>
+  <div class="foot">感想は <a href="https://x.com/pocket_shindan" target="_blank" rel="noopener">𝕏 @pocket_shindan</a> へ。<br>※ラボちゃんと登場人物は、オリジナルのキャラクターです</div>
+</div>
+<script>
+  const POSTS = [{"date": "2026-11-17", "kind": "日誌", "title": "はじめまして", "body": "はじめまして、ラボちゃんです🧪\n\nポケット診断研究所の新人研究員です。みなさんの恋のデータを集めています。\n恋愛タイプは🌙月見草型。自分の恋は…要検証です。\n\nみなさんは何型ですか？", "image": "labo_intro.png"}, {"date": "2026-11-18", "kind": "連載", "title": "第1話「無口な先輩」", "body": "研究所のネコタ先輩は、ほとんどしゃべらない。\n今日、わたしがコーヒーをこぼしたら、先輩は何も言わずにふいてくれた。\n…データにない行動です。これは要検証です！\n\n無口な人の優しさ、気づくほうですか？", "image": "labo_ep1.png"}, {"date": "2026-11-19", "kind": "日誌", "title": "研究日誌 #1", "body": "恋愛タイプ診断のデータを集めています。\nどのタイプが多いのか、集まったら発表しますね。\n\nみなさんは何型でしたか？", "image": ""}, {"date": "2026-11-20", "kind": "日誌", "title": "研究日誌 #2", "body": "「好き」がバレる瞬間・観察メモ\n①急に敬語になる\n②その人の投稿にだけ、いいねが速い\n③話すとき声が少し高くなる\n\nみなさんはどれでバレますか？", "image": ""}, {"date": "2026-11-21", "kind": "連載", "title": "第2話「相性◎じゃない」", "body": "先輩の恋愛タイプをこっそり診断してみた。結果は🐈猫型。\nわたしは🌙月見草型。相性◎は…🗼灯台型。\n所長「データがすべてじゃないよ」\n…ちょっと落ちこみ中です。\n\n相性◎じゃない人を好きになったこと、ありますか？", "image": "labo_ep2.png"}, {"date": "2026-11-22", "kind": "日誌", "title": "研究日誌 #3", "body": "ホットココアを飲みながら、観察ノートを整理中☕\n日曜の夜は、なぜか好きな人のことを考えてしまうらしいです（要検証）\n\nみなさんは日曜の夜、何してますか？", "image": ""}, {"date": "2026-11-23", "kind": "日誌", "title": "研究日誌 #4", "body": "今日は祝日なので研究所はお休み…のはずが、気づいたら観察ノートを開いていました📓\n\n休みの日も、つい好きなことをしちゃう人いますか？", "image": ""}, {"date": "2026-11-24", "kind": "日誌", "title": "研究日誌 #5", "body": "仮説：🐈猫型の人は「既読はすぐ、返信はゆっくり」\n\nただいまデータ募集中です。\n猫型のみなさん、当たってますか？", "image": ""}, {"date": "2026-11-25", "kind": "連載", "title": "第3話「引いてみる作戦」", "body": "データによると、猫型は追いかけると逃げるらしい。\nなので3日間、話しかけるのをがまんしてみた。\nすると先輩が「最近、話しかけてこないね」。\n…仮説、立証です！？\n\n押す派？引く派？どっちですか？", "image": "labo_ep3.png"}, {"date": "2026-11-26", "kind": "日誌", "title": "研究日誌 #6", "body": "所長の名言メモ\n「相性はゴールじゃなくて、スタート地点」\n\n…深いです。メモしました📓\nみなさんの好きな恋の名言はありますか？", "image": ""}, {"date": "2026-11-27", "kind": "日誌", "title": "研究日誌 #7", "body": "金曜の夜はデートに誘われやすい…というウワサを検証中です（要検証）\n\nみなさんは誘う派？誘われ待ち派？", "image": ""}, {"date": "2026-11-28", "kind": "連載", "title": "第4話「クリスマス係」", "body": "所長「クリスマス会の準備係は2人でお願いね」\n指名されたのは、わたしとネコタ先輩。\n先輩はクリスマス、どう過ごすタイプなんだろう…\n\n第1部おわり。クリスマス編は12月から🎄\nあなたのクリスマスタイプは？", "image": "labo_ep4.png", "link": {"href": "/xmas/", "text": "🧪 この診断をやってみる"}}, {"date": "2026-11-29", "kind": "日誌", "title": "研究日誌 #8", "body": "クリスマスまで、あと26日🎄\n研究所にもツリーを飾りました。\n\nみなさんのクリスマスタイプは何でしたか？", "image": ""}, {"date": "2026-11-30", "kind": "日誌", "title": "研究日誌 #9", "body": "11月の観察ノートが1冊うまりました📓\n来月は「冬の恋」を研究します。\n\nみなさんは冬と夏、恋がしたくなるのはどっちですか？", "image": ""}, {"date": "2026-12-06", "kind": "連載", "title": "第5話「買い出し」（クリスマス編）", "body": "クリスマス会の買い出しに、ネコタ先輩と2人で。\n先輩がカゴに入れたのは、ホットココア。\n「好きでしょ、これ」\n…先輩に話したこと、ありましたっけ？\n\n好きな人の好きなもの、覚えてるほうですか？", "image": "labo_ep5.png"}, {"date": "2026-12-08", "kind": "日誌", "title": "研究日誌 #10", "body": "仮説：寒い日ほど、好きな人に連絡したくなる（要検証）\n「寒いね」のひとことが、いちばん送りやすい気がします。\n\n寒い日、好きな人に送るなら「寒いね」？それとも別のひとこと？", "image": ""}, {"date": "2026-12-10", "kind": "日誌", "title": "研究日誌 #11", "body": "観察メモ：クリスマスの予定の聞き方\n①「24日って空いてる？」\n②「クリスマス、何するの？」\n③「ケーキ食べたくない？」\n\nみなさんは、どれで聞かれたいですか？", "image": ""}, {"date": "2026-12-12", "kind": "連載", "title": "第6話「てっぺんの星」", "body": "会場のツリーのてっぺんの星に、わたしの手は届かない。\nすると先輩が、横からひょいっとつけてくれた。\n所長「2人、いいコンビだね」\n…所長、それは要検証です！\n\n届かないとき、頼るほう？自分でがんばるほう？", "image": "labo_ep6.png"}, {"date": "2026-12-14", "kind": "日誌", "title": "研究日誌 #12", "body": "クリスマスまで、あと11日🎄\n研究所のクリスマス会の準備も、だいたい終わりました。\n\nみなさんは、クリスマスの予定、もう決まりましたか？", "image": ""}, {"date": "2026-12-15", "kind": "日誌", "title": "研究日誌 #13", "body": "今日から、研究日誌はこのページで書いていきます📓\nX でいつも読んでくれたみなさん、ありがとうございます。\n毎日ここに、観察ノートを1ページずつ。\n\nみなさんは、日記をつけるほうですか？"}, {"date": "2026-12-16", "kind": "日誌", "title": "研究日誌 #14", "body": "仮説：好きな人の前だと、ココアを飲むのがゆっくりになる（要検証）\n\nみなさんは、好きな人の前で食べるの、速くなる？ゆっくりになる？"}, {"date": "2026-12-17", "kind": "日誌", "title": "研究日誌 #15", "body": "所長の名言メモ その2\n「予定は、聞くより先に、空けておくもの」\n\n…深いです。メモしました📓\nみなさんは、クリスマスの予定、空けてますか？"}, {"date": "2026-12-18", "kind": "連載", "title": "第7話「先輩は何型？」", "image": "labo_ep7.png", "body": "準備の休けい中、先輩にクリスマス診断をすすめてみた。\n結果は☕ホットココア型。\n「ひとりでのんびり派、なんですね」と言ったら、\n先輩は少し考えて「…今年は、ちがうかも」\n…これは、要検証です！\n\nあなたのクリスマスタイプは？", "link": {"href": "/xmas/", "text": "🎄 クリスマスの過ごし方タイプ診断"}}, {"date": "2026-12-19", "kind": "日誌", "title": "研究日誌 #16", "body": "観察メモ：クリスマス前に増えるもの\n①「24日って空いてる？」の練習\n②プレゼントを選ぶ時間\n③ココアを飲む回数（わたし調べ）\n\nみなさんは、どれが増えてますか？"}, {"date": "2026-12-20", "kind": "日誌", "title": "研究日誌 #17", "body": "日曜の研究所は、しずかです。\n先輩の「今年は、ちがうかも」が、ずっと頭の中で再生されています。\n…（考察中）\n\nみなさんは、ひとことが頭から離れないこと、ありますか？"}, {"date": "2026-12-21", "kind": "日誌", "title": "研究日誌 #18", "body": "クリスマス会まで、あと3日🎄\n準備係の仕事は、のこりは飾りつけだけになりました。\n\nみなさんは、イベントの準備、好きなほうですか？"}, {"date": "2026-12-22", "kind": "連載", "title": "第8話「飾りつけのあと」", "image": "labo_ep8.png", "body": "会場の飾りつけが終わったのは、夜の8時。\n帰りぎわ、先輩が言った。\n「会のあと、ココア飲んで帰る？」\n…データにないお誘いです！\n\n次回はクリスマスイブ🎄\n誘われたら、すぐ返事するほう？少し考えるほう？"}, {"date": "2026-12-23", "kind": "日誌", "title": "研究日誌 #19", "body": "明日はクリスマス会。\n観察ノートに「明日の準備」を3つ書きました。\n①ココアの粉を多めに持っていく\n②会場には30分前に着く\n③先輩の前で、話すことを決めておく\n\nみなさんは、大事な日の前の夜、どう過ごしますか？"}, {"date": "2026-12-24", "kind": "連載", "title": "第9話「クリスマス会」", "image": "labo_ep9.png", "body": "クリスマス会は、所長の乾杯で始まった。\n会のあと、先輩と2人でココアを飲んだ。\n「来年も、準備係やる？」\n「…はい。データが、まだ足りないので」\n仮説、立証です…！？✨\n\nクリスマス編、おわり。\nあなたのクリスマスは、どんな日でしたか？"}, {"date": "2026-12-25", "kind": "日誌", "title": "研究日誌 #20", "body": "メリークリスマス🎄\nクリスマス編を読んでくれて、ありがとうございました。\n研究日誌は、これからもこのページで続きます📓\n\nみなさんの今年いちばんの思い出は、なんですか？"}];
+  const pad = (n) => String(n).padStart(2, "0");
+  const t = new Date(), today = t.getFullYear() + "-" + pad(t.getMonth() + 1) + "-" + pad(t.getDate());
+  const W = "日月火水木金土";
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const shown = POSTS.filter((p) => p.date <= today).sort((a, b) => (a.date < b.date ? 1 : -1));   // その日になった分だけ
+  let filter = "all", limit = 10;
+  function render() {
+    const list = shown.filter((p) => filter === "all" || p.kind === filter);
+    document.getElementById("list").innerHTML = list.slice(0, limit).map((p, i) => {
+      const d = new Date(p.date + "T00:00:00");
+      const label = (d.getMonth() + 1) + "/" + d.getDate() + "（" + W[d.getDay()] + "）";
+      return '<article class="entry"><div class="meta"><span class="kind' + (p.kind === "連載" ? " s" : "") + '">' + (p.kind === "連載" ? "📖 連載" : "📓 日誌") + "</span>" +
+        "<span>" + label + "</span>" + (p.date === today ? '<span class="new">NEW</span>' : "") + "</div>" +
+        "<h2>" + esc(p.title) + "</h2>" + (p.image ? '<img src="img/' + esc(p.image) + '" alt="" loading="lazy">' : "") +
+        '<p class="body">' + esc(p.body) + "</p>" +
+        (p.link ? '<a class="go" href="' + esc(p.link.href) + '">' + esc(p.link.text) + " →</a>" : "") + "</article>";
+    }).join("") || '<p class="lead">まだ日誌がありません。</p>';
+    document.getElementById("moreBtn").hidden = list.length <= limit;
+  }
+  document.querySelectorAll(".tabs button").forEach((b) => b.onclick = () => {
+    document.querySelectorAll(".tabs button").forEach((x) => x.classList.toggle("on", x === b));
+    filter = b.dataset.f; limit = 10; render();
+  });
+  document.getElementById("moreBtn").onclick = () => { limit += 10; render(); };
+  render();
+  if (GA_ID) gtag("event", "labo_view", { latest: shown[0] ? shown[0].date : "" });
+</script>
+</body>
+</html>

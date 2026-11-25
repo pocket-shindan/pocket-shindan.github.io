@@ -77,6 +77,11 @@
   .followline { display: inline-block; margin-top: 16px; font-size: 14px; color: var(--sub); text-decoration: none; border-bottom: 1px dashed #cdbfd3; padding-bottom: 2px; }
   .followline b { color: var(--violet); }
   .followline:hover { color: var(--ink); }
+  .labo { display: flex; gap: 14px; align-items: center; margin: 8px auto 4px; max-width: 760px; padding: 12px 16px; border-radius: 18px;
+          background: #fff; color: var(--ink); text-decoration: none; box-shadow: 0 6px 20px rgba(90,60,120,.10); font-size: 14px; line-height: 1.6; }
+  .labo img { width: 128px; border-radius: 12px; flex: none; }
+  .labo b { color: var(--violet); font-size: 15px; }
+  @media (max-width: 480px) { .labo img { width: 96px; } .labo { font-size: 13px; } }
   .stats { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
   .chip { background: rgba(255, 255, 255, .8); border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 700; color: var(--sub); }
 
@@ -155,6 +160,11 @@
       <span class="chip">🆓 登録なし・無料</span>
     </div>
   </header>
+
+  <a class="labo" href="./labo/" onclick="if (GA_ID) gtag('event', 'labo_click', { from: 'top' });">
+    <img src="./labo/img/labo_intro.png" alt="ラボちゃん">
+    <span><b>🧪 ラボちゃんの研究日誌</b><br>恋の観察ノートと連載「ラボちゃんの恋は要検証」を毎日更新中 →</span>
+  </a>
 
   <h2 class="section" id="list">✨ 診断いちらん</h2>
   <div class="grid">
