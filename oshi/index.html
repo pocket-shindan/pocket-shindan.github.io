@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>推し活タイプ診断｜12問であなたの推し活スタイルがわかる</title>
+<meta name="description" content="12問・約1分。現場派？おうち派？ひとすじ？いろいろ？あなたの推し活スタイルを8タイプで診断します。相性のいいタイプもわかる！">
+<meta property="og:title" content="推し活タイプ診断｜12問であなたの推し活スタイルがわかる">
+<meta property="og:description" content="12問・約1分。あなたの推し活スタイルを8タイプから診断します。">
+<meta name="pocket:date" content="2026-11-27">
+<meta name="pocket:color" content="#f2683c">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pocket-shindan.github.io/oshi/">
+<link rel="canonical" href="https://pocket-shindan.github.io/oshi/">
+<meta property="og:image" content="https://pocket-shindan.github.io/oshi/ogp.png">
+<meta property="og:site_name" content="pocket-shindan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pocket-shindan.github.io/oshi/ogp.png">
+<script>
+  // 手元の確認（localhost やファイル直開き）は計測しない。本番だけ計測する
+  const GA_ID = location.hostname.endsWith("github.io") ? "G-SWK4ZXGYWH" : "";
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  function track(name, params) { if (GA_ID) gtag("event", name, Object.assign({ quiz: "oshi" }, params || {})); }
+  if (GA_ID) {
+    const s = document.createElement("script");
+    s.async = true; s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+    document.head.appendChild(s);
+    gtag("js", new Date()); gtag("config", GA_ID);
+  }
+</script>
+<style>
+  :root {
+    --bg1: #fff3ec; --bg2: #f5efff;
+    --card: #ffffff; --ink: #33231d; --sub: #86716a;
+    --accent: #f2683c; --accent2: #ff9a6b; --green: #8b5cf6; --line: #fbe0d3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; color: var(--ink);
+    font-family: "Hiragino Maru Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+    background: linear-gradient(160deg, var(--bg1), var(--bg2));
+    display: flex; justify-content: center; padding: 24px 16px 48px;
+  }
+  .wrap { width: 100%; max-width: 480px; }
+  .card {
+    background: var(--card); border-radius: 24px; padding: 28px 22px;
+    box-shadow: 0 10px 30px rgba(242, 104, 60, .14);
+    border-top: 6px solid var(--green);
+  }
+  h1 { font-size: 24px; margin: 8px 0 6px; text-align: center; letter-spacing: .02em; }
+  .lead { text-align: center; color: var(--sub); margin: 0 0 22px; line-height: 1.7; }
+  .hero { font-size: 56px; text-align: center; margin-top: 4px; }
+  button {
+    font: inherit; cursor: pointer; border: none; width: 100%;
+    border-radius: 999px; padding: 15px 18px; font-weight: 700; font-size: 16px;
+    transition: transform .08s ease, box-shadow .15s ease, background .15s;
+  }
+  button:active { transform: scale(.98); }
+  .primary { background: linear-gradient(90deg, var(--accent), var(--accent2)); color: #fff; box-shadow: 0 6px 16px rgba(242, 104, 60, .3); }
+  .ghost { background: transparent; color: var(--sub); font-weight: 500; margin-top: 10px; }
+  .progress { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; margin-bottom: 8px; }
+  .bar { height: 100%; width: 0; background: linear-gradient(90deg, var(--green), #b79cff); transition: width .25s ease; }
+  .count { font-size: 13px; color: var(--sub); text-align: right; margin-bottom: 18px; }
+  .q { font-size: 20px; font-weight: 700; line-height: 1.6; margin: 0 0 22px; min-height: 64px; }
+  .opt {
+    background: #fff; color: var(--ink); border: 2px solid var(--line); text-align: left;
+    border-radius: 16px; padding: 16px 18px; margin-bottom: 12px; font-weight: 600;
+  }
+  .opt:hover { border-color: var(--accent2); background: #fff6f1; }
+  .r-emoji { font-size: 72px; text-align: center; line-height: 1.1; }
+  .r-label { text-align: center; color: var(--sub); font-size: 14px; margin-top: 10px; }
+  .r-name { text-align: center; font-size: 28px; font-weight: 800; margin: 4px 0 4px; color: var(--accent); }
+  .r-catch { text-align: center; font-weight: 700; margin: 0 0 18px; }
+  .r-desc { line-height: 1.85; margin: 0 0 18px; }
+  .box { border-radius: 16px; padding: 14px 16px; margin-bottom: 12px; line-height: 1.75; }
+  .box b { display: block; margin-bottom: 4px; }
+  .good { background: #fff0e8; }
+  .care { background: #f6f3ee; }
+  .match { background: #f3eeff; }
+  .share { background: #111; color: #fff; margin-top: 8px; }
+  .follow { display: block; text-align: center; margin-top: 10px; padding: 13px 18px; border-radius: 999px; border: 2px solid var(--accent); color: var(--accent); font-weight: 700; text-decoration: none; }
+  .follow:hover { background: var(--line); }
+  .note { font-size: 12px; color: var(--sub); text-align: center; margin-top: 18px; line-height: 1.7; }
+  .hidden { display: none; }
+  .fade { animation: fade .25s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="start" class="card fade">
+    <div class="hero">💫</div>
+    <h1>推し活タイプ診断</h1>
+    <p class="lead">12問・約1分。<br>あなたの推し活スタイルを<br>8タイプから診断します。<br>相性のいいタイプもわかるよ。</p>
+    <button class="primary" id="startBtn">診断をはじめる</button>
+    <p class="note">※エンタメ目的の診断です。人・キャラクター・作品など、どんな推しにも当てはまります</p>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="count" id="count"></div>
+    <p class="q" id="question"></p>
+    <button class="opt" id="optA"></button>
+    <button class="opt" id="optB"></button>
+    <button class="ghost" id="backBtn">← ひとつ戻る</button>
+  </section>
+
+  <section id="result" class="card hidden">
+    <div class="r-emoji" id="rEmoji"></div>
+    <div class="r-label">あなたの推し活タイプは…</div>
+    <div class="r-name" id="rName"></div>
+    <p class="r-catch" id="rCatch"></p>
+    <div id="pocket-follow-top"></div>
+    <p class="r-desc" id="rDesc"></p>
+    <div class="box good"><b>💖 推し活のいいところ</b><span id="rGood"></span></div>
+    <div class="box care"><b>⚠️ ちょっと意識してみたいこと</b><span id="rCare"></span></div>
+    <div class="box match"><b>🤝 相性◎のタイプ（ちがう部分を、おたがいに補い合う）</b><span id="rMatch"></span></div>
+    <div id="pocket-pair"></div>
+    <button class="primary share" id="shareBtn">𝕏 で結果をシェアする</button>
+    <div id="pocket-share"></div>
+    <a class="follow" id="followBtn" href="https://x.com/intent/follow?screen_name=pocket_shindan" target="_blank" rel="noopener">＋ フォローして新しい診断を受け取る</a>
+    <button class="ghost" id="retryBtn">もう一度診断する</button>
+    <div id="pocket-others"></div>
+    <p class="note">※エンタメ目的の診断です<br>※アクセス解析に Google アナリティクスを使用しています（個人を特定する情報は収集しません）</p>
+  </section>
+
+</div>
+
+<script>
+// 軸: A=現場・お出かけ派 / C=おうち派, H=発信・布教派 / L=ひっそり派, S=ひとすじ / F=いろいろ
+const QUESTIONS = [
+  { q: "推しのイベントがあったら？", a: ["できるだけ行きたい", "A"], b: ["配信や画面ごしで楽しみたい", "C"] },
+  { q: "推しの「いい！」を見つけたら？", a: ["すぐ感想を発信したくなる", "H"], b: ["心の中でかみしめる", "L"] },
+  { q: "あなたの推しは？", a: ["ひとすじ。ひとつだけ", "S"], b: ["気づけば何人もいる", "F"] },
+  { q: "休みの日の推し活は？", a: ["推しにゆかりのある場所へ出かける", "A"], b: ["家で動画や写真を見返す", "C"] },
+  { q: "友だちに推しの話をするのは？", a: ["好き。つい布教しちゃう", "H"], b: ["話したいときに話す", "L"] },
+  { q: "新しく気になる人や作品が現れたら？", a: ["やっぱり今の推しがいちばん", "S"], b: ["推しが増えるのは大歓迎", "F"] },
+  { q: "推し活でいちばん好きな時間は？", a: ["同じ空間で感じる熱気", "A"], b: ["自分のペースで味わう時間", "C"] },
+  { q: "推し仲間とは？", a: ["どんどんつながりたい", "H"], b: ["ひとりで楽しむのも好き", "L"] },
+  { q: "くわしいのは？", a: ["ひとつの推しのことなら、深くくわしい", "S"], b: ["いろんなジャンルを広く知っている", "F"] },
+  { q: "新しいグッズが出たら？", a: ["お店やイベントで手に入れたい", "A"], b: ["届くのを家で待ちたい", "C"] },
+  { q: "推しの記念日には？", a: ["お祝いの言葉を発信する", "H"], b: ["ひっそりお祝いする", "L"] },
+  { q: "推しの話題が出たら？", a: ["その推しの話なら、いくらでも話せる", "S"], b: ["いろんな推しの話をしたくなる", "F"] },
+];
+
+const TYPES = {
+  AHS: { emoji: "📣", name: "応援団長型", catch: "現場で全力、ひとすじに応援する人",
+    desc: "推しのイベントの日は、早めに会場へ。うちわやペンライトで、まっすぐな気持ちを全力で届けるタイプです。",
+    good: "一途で行動力があるので、推し仲間からも頼りにされる存在。あなたの声援は、ちゃんと届いているはず。",
+    care: "全力なぶん、予定をつめこみがち。推し活以外の毎日の楽しみも、同じくらい大切に。" },
+  AHF: { emoji: "🎪", name: "フェス型", catch: "いろんな現場をはしごして盛り上げる人",
+    desc: "気になるイベントがあれば、ジャンルを問わず飛びこむタイプ。どこに行っても、その場の熱気をいちばん楽しめます。",
+    good: "フットワークが軽く、新しい推しにもすぐ出会える人。まわりを巻きこんで、楽しい空気をつくります。",
+    care: "あちこち楽しむぶん、時間もお金も使いすぎに気をつけて。ほんとうに行きたいものを選ぶと、もっと楽しめます。" },
+  ALS: { emoji: "🌸", name: "見守り隊型", catch: "現場で静かに、推しを見守る一途な人",
+    desc: "会場には足を運ぶけれど、さわぐより、推しの姿をしっかり目に焼きつけたいタイプ。帰り道に、ひとりで余韻をかみしめます。",
+    good: "推しへの気持ちが深く、落ち着いて楽しめる人。静かでも、その応援はとても力強いです。",
+    care: "感想を心にしまいがち。たまには仲間に「よかったね」と話すと、楽しさが増えるかも。" },
+  ALF: { emoji: "🧭", name: "旅人型", catch: "気になる現場に、ふらっと出かける自由人",
+    desc: "気になる人やイベントを見つけたら、行ける範囲でふらっと出かけるタイプ。推し活と、その街の散歩もいっしょに楽しみます。",
+    good: "気持ちのままに動ける自由さが魅力。いろんな世界を知っているので、話していて楽しい人です。",
+    care: "気の向くままに動くぶん、帰りの時間を忘れがち。出かける前に、帰る時間を決めておくと安心。" },
+  CHS: { emoji: "✍️", name: "語り部型", catch: "推しの魅力を、熱い言葉で語り続ける人",
+    desc: "家で何度も見返しては、感想をていねいに言葉にするタイプ。あなたの感想を読んで、推しを好きになった人もいるかもしれません。",
+    good: "好きなものを言葉にする力があります。推しの魅力を、いちばんわかりやすく伝えられる人です。",
+    care: "語りたいことが多くて、長くなりがち。ときどき、ひとことの感想もまぜてみて。" },
+  CHF: { emoji: "🎀", name: "布教係型", catch: "いろんな推しを、上手に広める人",
+    desc: "好きなものが多く、友だちに合いそうな推しを見つけて紹介するのが得意なタイプ。おすすめ上手で、仲間が増えていきそう。",
+    good: "人の好みを見るのが上手な人。あなたのおすすめで、新しい楽しみに出会った人もいるかも。",
+    care: "すすめたい気持ちが先走ることも。相手が興味を持ったときに話すと、もっと伝わります。" },
+  CLS: { emoji: "📦", name: "宝箱型", catch: "ひとりで、推しの思い出を大切にしまう人",
+    desc: "グッズや思い出をていねいにしまって、ときどきそっと見返すタイプ。だれにも言わなくても、推しへの気持ちはとても深いです。",
+    good: "ものも気持ちも大切にできる人。長い時間をかけて、推しとの思い出を育てていけます。",
+    care: "仲間と話すと、楽しさがもうひとつ増えるかも。気の合う人に、少しだけ話してみて。" },
+  CLF: { emoji: "🎧", name: "ラジオ型", catch: "気が向いたとき、いろんな推しをゆるっと楽しむ人",
+    desc: "好きなものはたくさん。でも追いかけすぎず、気が向いたときに楽しむタイプ。推し活を、毎日のちょっとした楽しみにしています。",
+    good: "自分のペースを守れる人。無理をしないので、長く楽しく推し活を続けやすい人です。",
+    care: "ゆるく楽しむぶん、大事なお知らせを見のがすことも。いちばん好きな推しのお知らせだけは、チェックしておくと安心。" },
+};
+
+// 相性◎: 現場/おうち と 発信/ひっそり が逆、ひとすじ/いろいろ は同じ（応援団長↔宝箱、フェス↔ラジオ、見守り隊↔語り部、旅人↔布教係）
+function bestMatch(code) {
+  const flip = { A: "C", C: "A", H: "L", L: "H" };
+  return flip[code[0]] + flip[code[1]] + code[2];
+}
+
+const $ = (id) => document.getElementById(id);
+let idx = 0;
+let answers = [];
+
+function show(id) {
+  ["start", "quiz", "result"].forEach((s) => $(s).classList.add("hidden"));
+  $(id).classList.remove("hidden");
+  $(id).classList.remove("fade"); void $(id).offsetWidth; $(id).classList.add("fade");
+  window.scrollTo(0, 0);
+}
+
+function renderQuestion() {
+  const item = QUESTIONS[idx];
+  $("question").textContent = `Q${idx + 1}. ${item.q}`;
+  $("optA").textContent = item.a[0];
+  $("optB").textContent = item.b[0];
+  $("count").textContent = `${idx + 1} / ${QUESTIONS.length}`;
+  $("bar").style.width = `${(idx / QUESTIONS.length) * 100}%`;
+  $("backBtn").style.visibility = idx === 0 ? "hidden" : "visible";
+}
+
+function answer(choice) {
+  answers[idx] = QUESTIONS[idx][choice][1];
+  idx++;
+  if (idx < QUESTIONS.length) renderQuestion();
+  else showResult(calcType());
+}
+
+function calcType() {
+  const score = {};
+  answers.forEach((k) => (score[k] = (score[k] || 0) + 1));
+  // 各軸4問。2対2の同点は「1問目の回答」を優先
+  const pick = (x, y) => {
+    const sx = score[x] || 0, sy = score[y] || 0;
+    if (sx !== sy) return sx > sy ? x : y;
+    return answers.find((k) => k === x || k === y);
+  };
+  return pick("A", "C") + pick("H", "L") + pick("S", "F");
+}
+
+function showResult(code) {
+  const t = TYPES[code];
+  const m = TYPES[bestMatch(code)];
+  $("rEmoji").textContent = t.emoji;
+  $("rName").textContent = t.name;
+  $("rCatch").textContent = t.catch;
+  $("rDesc").textContent = t.desc;
+  $("rGood").textContent = t.good;
+  $("rCare").textContent = t.care;
+  $("rMatch").textContent = `${m.emoji} ${m.name}（${m.catch}）`;
+  $("bar").style.width = "100%";
+  track("quiz_complete", { result_type: code, result_name: t.name });
+  // タイプ別ページ（r/<code>/）を共有すると、X にタイプ別の画像カードが出る
+  const base = location.href.split("#")[0].split("?")[0].replace(/index\.html$/, "").replace(/\/?$/, "/");
+  const url = base + "r/" + code.toLowerCase() + "/";
+  const text = `私の推し活タイプは「${t.emoji}${t.name}」でした！\n${t.catch}\n相性◎は${m.emoji}${m.name}\n\n#推し活タイプ診断\n`;
+  $("shareBtn").onclick = () => {
+    track("share_click", { result_type: code, method: "x" });
+    const shareUrl = "https://x.com/intent/post?text=" + encodeURIComponent(text) +
+      (url.startsWith("http") ? "&url=" + encodeURIComponent(url) : "") + "&via=pocket_shindan";
+    window.open(shareUrl, "_blank", "noopener");
+  };
+  // LINE・その他のアプリ・コピーのボタン（/share.js）
+  if (window.pocketShareSet) pocketShareSet({ text, url, code });
+  show("result");
+}
+
+$("startBtn").onclick = () => { track("quiz_start"); idx = 0; answers = []; renderQuestion(); show("quiz"); };
+$("optA").onclick = () => answer("a");
+$("optB").onclick = () => answer("b");
+$("backBtn").onclick = () => { if (idx > 0) { idx--; renderQuestion(); } };
+$("retryBtn").onclick = () => show("start");
+$("followBtn").onclick = () => track("follow_click", { position: "bottom" });
+</script>
+<script src="/share.js" defer></script>
+<script src="/others.js" defer></script>
+</body>
+</html>

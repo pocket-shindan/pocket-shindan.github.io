@@ -155,7 +155,7 @@
     </div>
     <a class="followline" href="https://x.com/intent/follow?screen_name=pocket_shindan" target="_blank" rel="noopener" onclick="if (GA_ID) gtag('event', 'follow_click', { from: 'top' });">𝕏 新しい診断のお知らせは <b>@pocket_shindan</b> をフォロー</a>
     <div class="stats">
-      <span class="chip">🧪 公開中 5本</span>
+      <span class="chip">🧪 公開中 6本</span>
       <span class="chip">⏱ どれも約1分</span>
       <span class="chip">🆓 登録なし・無料</span>
     </div>
@@ -168,6 +168,15 @@
 
   <h2 class="section" id="list">✨ 診断いちらん</h2>
   <div class="grid">
+    <a class="card" href="./oshi/" style="--c:#f2683c">
+      <div class="thumb"><img src="./oshi/ogp.png" alt="推し活タイプ診断" loading="lazy"><span class="badge">NEW</span></div>
+      <div class="body">
+        <h3>推し活タイプ診断</h3>
+        <p>12問・約1分。現場派？おうち派？ひとすじ？いろいろ？あなたの推し活スタイルを8タイプで診断します。相性のいいタイプもわかる！</p>
+        <div class="meta"><span>12問</span><span>約1分</span><span>2026.11.27 公開</span></div>
+        <span class="go">診断する →</span>
+      </div>
+    </a>
     <a class="card" href="./reply/" style="--c:#2f7de1">
       <div class="thumb"><img src="./reply/ogp.png" alt="返信タイプ診断" loading="lazy"><span class="badge">NEW</span></div>
       <div class="body">
@@ -223,7 +232,7 @@
 </div>
 
 <script>
-  const QUIZZES = ["./reply/","./numa/","./mero/","./xmas/","./love/"];
+  const QUIZZES = ["./oshi/","./reply/","./numa/","./mero/","./xmas/","./love/"];
   document.getElementById("random").onclick = () => {
     if (GA_ID) gtag("event", "random_click");
     location.href = QUIZZES[Math.floor(Math.random() * QUIZZES.length)];
